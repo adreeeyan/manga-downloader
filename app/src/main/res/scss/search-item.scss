@@ -1,0 +1,23 @@
+.search-item {
+  max-height: 300px;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  margin: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.grow {
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.17);
+    z-index: 100;
+  }
+}

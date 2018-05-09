@@ -1,0 +1,27 @@
+.empty-list-placeholder {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+
+  .add {
+    height: 250px;
+    width: 250px;
+    font-size: 175px;
+    margin-bottom: 10px;
+  }
+
+  .label {
+    font-size: 30px;
+  }
+
+  .recommendation {
+    font-size: 20px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

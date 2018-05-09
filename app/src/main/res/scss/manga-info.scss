@@ -1,0 +1,53 @@
+@import "~bootswatch/dist/superhero/variables";
+
+.manga-info {
+  width: 100%;
+  padding: 10px;
+  background-color: rgba($gray-900, 0.5);
+  box-shadow: 0 2rem 3rem rgba($primary, 0.3) !important;
+  margin: -10px 0 50px 0 !important;
+
+  .cover > img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+
+    .summary {
+      flex-grow: 1;
+
+      em {
+        font-size: 0.8rem;
+      }
+    }
+
+    .actions {
+      margin-left: auto;
+    }
+  }
+}
+
+/* styles for show more */
+.show-more,
+.show-less {
+  font-size: small;
+  font-style: italic;
+}
+
+.show-more em,
+.less {
+  display: none;
+}
+
+.show-more:target em,
+.show-more:target .less {
+  display: block;
+}
+
+.show-more:target .more {
+  display: none;
+}

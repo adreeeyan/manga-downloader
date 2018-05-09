@@ -1,0 +1,66 @@
+@import "~bootswatch/dist/superhero/variables";
+
+.app {
+  display: flex;
+  height: 100vh;
+}
+
+.menu {
+  background-color: #0e161d;
+  width: 50px;
+
+  a {
+    margin: 5px;
+    width: 40px;
+    height: 40px;
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+    line-height: 1.5;
+    border-radius: 2px;
+    text-align: center;
+
+    &:hover,
+    &.active {
+      background-color: lighten(blue, 13%);
+      color: white;
+      text-decoration: none;
+    }
+
+    &:last-of-type {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+}
+
+.content {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+// page transitions
+.page {
+  transition: all 0.25s ease-in-out;
+
+  &.transition-appear {
+    opacity: 0;
+    transform: translateX(20px);
+
+    &.transition-appear-active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  &.transition-leave {
+    opacity: 1;
+    transform: translateX(-20px);
+
+    &.transition-leave-active {
+      opacity: 0;
+      transform: translateX(0);
+    }
+  }
+}

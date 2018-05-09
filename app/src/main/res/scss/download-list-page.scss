@@ -1,0 +1,15 @@
+.download-list-page {
+    padding: 30px;
+    
+    .filter-state {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .add-button {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+    }
+}
