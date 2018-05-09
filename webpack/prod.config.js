@@ -26,10 +26,7 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: ["css-loader", "sass-loader"]
-        })
+        use: ["style-loader", "css-loader", "sass-loader"]
       },
       {
         test: /\.(png|jpg|gif)$/,

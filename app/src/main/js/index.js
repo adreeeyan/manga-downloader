@@ -7,8 +7,6 @@ import { AppContainer } from "react-hot-loader";
 import reducers from "./reducers/index";
 import App from "./app";
 
-import "font-awesome/css/font-awesome.min.css";
-
 /*
 Here we are getting the initial state injected by the server. See routes/index.js for more details
  */
