@@ -9,40 +9,37 @@
     "start": "npm run prod && electron app/build/app.js",
     "lint": "eslint --ext .jsx,.js app/src/main --fix",
     "pack": "electron-builder --dir",
-    "dist": "rm -rf ./release && npm run prod && electron-builder",
+    "dist": "rm -rf ./app/build && rm -rf ./release && npm run prod && electron-builder",
     "postinstall": "electron-builder install-app-deps"
   },
   "author": "Adrian Dela Piedra <adrian.onrails@gmail.com>",
   "license": "MIT",
   "build": {
-    "productName": "electron-react",
+    "productName": "Baruch: Manga downloader",
     "win": {
       "target": "NSIS"
     },
     "linux": {
+      "category": "Utility",
       "target": [
         "deb",
         "AppImage"
       ]
     },
     "mac": {
-      "category": "public.app-category.developer-tools"
+      "category": "public.app-category.utilities"
     },
     "directories": {
       "output": "release"
-    },
-    "files": [
-      "./app/build"
-    ]
+    }
   },
   "keywords": [
     "manga",
     "downloader",
+    "baruch",
     "electron",
-    "react",
-    "react router v4",
-    "redux",
-    "webpack 3"
+    "desktop",
+    "software"
   ],
   "devDependencies": {
     "babel-core": "^6.26.3",

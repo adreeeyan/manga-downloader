@@ -26,7 +26,10 @@ module.exports = {
       },
       {
         test: /\.(css|scss)$/,
-        use: ["style-loader", "css-loader", "sass-loader"]
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: ["css-loader", "sass-loader"]
+        })
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -40,11 +43,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "url-loader?limit=10000&mimetype=application/font-woff"
-      },
-      {
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: "file-loader"
       }
     ]
@@ -59,7 +58,7 @@ module.exports = {
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new MinifyPlugin(),
-    new ExtractTextPlugin("css/main.css"),
+    new ExtractTextPlugin("main.css"),
     new CopyWebpackPlugin([
       {
         from: "./src/main/app.js",
