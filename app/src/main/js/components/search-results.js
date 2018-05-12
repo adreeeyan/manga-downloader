@@ -4,20 +4,17 @@ import MangaInfo from "./manga-info";
 
 import "../../res/scss/search-results.scss";
 
-const SearchResults = () => (
+const SearchResults = ({ collection = [], selectManga = {} }) => (
   <div className="search-results">
-    <h3>KissManga</h3>
-    <hr />
-    <div className="row rows">
-      <SearchItem />
-      <SearchItem />
-      <SearchItem />
-      <SearchItem />
-      <SearchItem />
-      <SearchItem />
-      <SearchItem />
-    </div>
-    <MangaInfo />
+    {collection.map((c, i) => (
+      <div key={i}>
+        <h3>{c.source}</h3>
+        <hr />
+        <div className="row rows">
+          {c.mangas.map(manga => <SearchItem key={manga.id} {...manga} />)}
+        </div>
+      </div>
+    ))}
   </div>
 );
 

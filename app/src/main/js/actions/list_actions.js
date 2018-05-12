@@ -1,20 +1,25 @@
 import { LIST_ACTIONS } from '../consts/action_types';
 
-export const viewManga = name => ({
+export const viewManga = id => ({
   type: LIST_ACTIONS.MANGA_VIEW,
-  name,
+  id
 });
 
-export const addManga = item => ({
+export const addManga = manga => ({
   type: LIST_ACTIONS.MANGA_ADD,
-  item,
+  manga
 });
 
-export const searchManga = name => ({
+export const searchManga = title => ({
   type: LIST_ACTIONS.MANGA_SEARCH,
-  name,
+  title
 });
 
 export const clearManga = () => ({
-  type: LIST_ACTIONS.MANGA_CLEAR,
+  type: LIST_ACTIONS.MANGA_CLEAR
 });
+
+export const setFilterValue = value => ({
+  type: LIST_ACTIONS.SET_FILTER_VALUE,
+  value
+})
