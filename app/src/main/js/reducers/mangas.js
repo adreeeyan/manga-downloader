@@ -2,7 +2,7 @@ import { LIST_ACTIONS } from "../consts/action_types";
 import DEFAULT_STATE from "../consts/default_state";
 
 const mangas = (state = DEFAULT_STATE.mangas, action) => {
-  console.log("action", action, "state", state);
+  console.log("manga action", action, "state", state);
   switch (action.type) {
     case LIST_ACTIONS.MANGA_ADD:
       return [

@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import _ from "lodash";
 import SearchResults from "../components/search-results";
+import { selectMangaForDownload } from "../actions/list_actions";
 
 const createCollection = (mangas, searchValue) => {
   const output = _(mangas)
@@ -18,7 +19,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  // toggleManga: id => dispatch(toggleTodo(id))
+  selectManga: id => dispatch(selectMangaForDownload(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchResults);

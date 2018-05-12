@@ -2,8 +2,8 @@ import React from "react";
 
 import "../../res/scss/search-item.scss";
 
-const SearchItem = ({title, cover}) => (
-  <div className="card search-item grow">
+const SearchItem = ({title, cover, onClick}) => (
+  <div className="card search-item grow" onClick={onClick}>
     <img
       className="card-img-top"
       src={cover || "http://via.placeholder.com/170x180"}

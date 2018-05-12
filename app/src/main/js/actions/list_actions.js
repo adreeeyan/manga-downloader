@@ -1,7 +1,7 @@
 import { LIST_ACTIONS } from '../consts/action_types';
 
-export const viewManga = id => ({
-  type: LIST_ACTIONS.MANGA_VIEW,
+export const selectMangaForDownload = id => ({
+  type: LIST_ACTIONS.MANGA_SELECT_FOR_DOWNLOAD,
   id
 });
 

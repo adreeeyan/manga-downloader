@@ -3,6 +3,7 @@ import SearchBar from "../containers/searchbar";
 import SearchResults from "../components/search-results";
 import VisibleSearchedMangas from "../containers/visible-searched-mangas";
 import MangaInfo from "../components/manga-info";
+import SelectedMangaInfo from "../containers/selected-manga-info";
 
 const SearchMangaPage = () => (
   <div className="search-manga-page transition-item page">
@@ -10,10 +11,9 @@ const SearchMangaPage = () => (
       <SearchBar />
     </div>
     <div className="results">
-      {/* <SearchResults /> */}
       <VisibleSearchedMangas />
     </div>
-    <MangaInfo />
+    <SelectedMangaInfo />
   </div>
 );
 

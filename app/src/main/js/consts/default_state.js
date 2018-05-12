@@ -1,5 +1,3 @@
-import LIST_ITEMS from "./list_items";
-
 const mangas = [...Array(20).keys()].map(id => {
   return {
     id: id,
@@ -9,4 +7,4 @@ const mangas = [...Array(20).keys()].map(id => {
 });
 
 // eslint-disable-next-line
-export default { mangas: mangas, searchValue: "" };
+export default { mangas: mangas, searchValue: "", selectedMangaForDownload: null };

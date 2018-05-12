@@ -12,6 +12,8 @@
   box-shadow: 0 2rem 3rem rgba($primary, 0.3) !important;
   margin: 0 !important;
   overflow-y: auto;
+  z-index: 100;
+  -webkit-animation-duration: 0.5s !important;
 
   .cover {
     display: flex;
@@ -104,7 +106,8 @@
         background-color: rgba($gray-100, 0.1);
         border: 0;
         border-bottom: 2px solid $white;
-        max-width: 40px;
+        max-width: 55px;
+        padding-left: 5px;
       }
     }
   }

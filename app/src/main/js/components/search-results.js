@@ -11,7 +11,13 @@ const SearchResults = ({ collection = [], selectManga = {} }) => (
         <h3>{c.source}</h3>
         <hr />
         <div className="row rows">
-          {c.mangas.map(manga => <SearchItem key={manga.id} {...manga} />)}
+          {c.mangas.map(manga => (
+            <SearchItem
+              key={manga.id}
+              {...manga}
+              onClick={() => selectManga(manga.id)}
+            />
+          ))}
         </div>
       </div>
     ))}
