@@ -22,4 +22,10 @@ export const clearManga = () => ({
 export const setFilterValue = value => ({
   type: LIST_ACTIONS.SET_FILTER_VALUE,
   value
+});
+
+export const downloadManga = (mangaId, chapters) => ({
+  type: LIST_ACTIONS.DOWNLOAD_MANGA,
+  mangaId,
+  chapters
 })

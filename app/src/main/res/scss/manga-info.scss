@@ -2,6 +2,7 @@
 
 .manga-info {
   width: calc(100% - 50px);
+  color: $white;
   height: 100%;
   padding: 50px;
   position: fixed;
@@ -9,7 +10,6 @@
   top: 0;
   flex-direction: row;
   background-color: rgba($gray-900, 0.95);
-  box-shadow: 0 2rem 3rem rgba($primary, 0.3) !important;
   margin: 0 !important;
   overflow-y: auto;
   z-index: 100;

@@ -1,8 +1,8 @@
 import React from "react";
 
-import DownloadItem from "../components/download-item";
 import DownloadStatesFilter from "../components/download-states-filter";
 import AddMangaButton from "../components/add-manga-button";
+import DownloadsList from "../containers/downloads-list";
 
 import "../../res/scss/download-list-page.scss";
 
@@ -11,14 +11,7 @@ const DownloadListPage = () => (
     <div className="filter-state mb-4">
       <DownloadStatesFilter />
     </div>
-    <div className="row">
-      <div className="col-sm-12 col-md">
-        <DownloadItem />
-      </div>
-      <div className="col-sm-12 col-md">
-        <DownloadItem />
-      </div>
-    </div>
+    <DownloadsList />
     <div className="add-button">
       <AddMangaButton />
     </div>

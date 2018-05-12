@@ -2,14 +2,14 @@ import React from "react";
 
 import "../../res/scss/download-item.scss";
 
-const DownloadItem = () => (
+const DownloadItem = ({manga}) => (
   <div className="download-item">
     <div className="row align-items-center">
       <div className="cover">
         <img src="http://via.placeholder.com/150x150" alt="Cover" />
       </div>
       <div className="col-sm">
-        <h5>Manga title here</h5>
+        <h5>Manga title #{manga.mangaId}</h5>
         <h6>
           <em>- Author name</em>
         </h6>

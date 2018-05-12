@@ -1,9 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
-import MangaInfo from "../components/manga-info";
-import { selectMangaForDownload } from "../actions/list_actions";
 
-const SelectedMangaInfo = ({ manga, close }) => {
+import MangaInfo from "../components/manga-info";
+import { selectMangaForDownload, downloadManga } from "../actions/list_actions";
+
+const SelectedMangaInfo = ({ manga, onClickClose, onClickAdd }) => {
   let isClosing = false;
 
   return (
@@ -13,9 +14,10 @@ const SelectedMangaInfo = ({ manga, close }) => {
           manga={manga}
           onClickClose={() => {
             setTimeout(() => {
-              close();
+              onClickClose();
             }, 500);
           }}
+          onClickAdd={onClickAdd}
         />
       )}
     </div>
@@ -28,6 +30,7 @@ const getMangaInfo = id => {
   }
   const chapters = [...Array(20).keys()].map(id => `Chaptero ${id}`);
   return {
+    id: id,
     title: `Manga title #${id}`,
     author: "Author name",
     cover: "http://via.placeholder.com/170x180",
@@ -45,7 +48,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  close: () => dispatch(selectMangaForDownload(null))
+  onClickClose: () => dispatch(selectMangaForDownload(null)),
+  onClickAdd: (mangaId, chapters) => dispatch(downloadManga(mangaId, chapters))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SelectedMangaInfo);

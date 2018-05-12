@@ -7,4 +7,4 @@ const mangas = [...Array(20).keys()].map(id => {
 });
 
 // eslint-disable-next-line
-export default { mangas: mangas, searchValue: "", selectedMangaForDownload: null };
+export default { mangas: mangas, searchValue: "", selectedMangaForDownload: null, downloadedMangas: [], downloadedMangasFilter: null };
