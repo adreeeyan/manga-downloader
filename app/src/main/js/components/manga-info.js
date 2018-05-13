@@ -7,6 +7,28 @@ import ChaptersSelector from "./chapters-selector";
 
 class MangaInfo extends Component {
   state = { isClosing: false };
+
+  close = () => {
+    this.setState({ isClosing: true });
+    this.props.onClickClose();
+  };
+
+  escFunction = (event) => {
+    console.log("event", event.keyCode)
+    if (event.keyCode === 27) {
+      // close manga info
+      this.close();
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener("keydown", this.escFunction, false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.escFunction, false);
+  }
+
   render() {
     let { manga, onClickClose, onClickAdd, history, selectedChapters } = {
       ...this.props
@@ -16,13 +38,7 @@ class MangaInfo extends Component {
         className={classNames("manga-info", "row", "animated", "slideInUp", {
           slideOutDown: this.state.isClosing
         })}>
-        <span
-          className="fa fa-close close"
-          onClick={() => {
-            this.setState({ isClosing: true });
-            onClickClose();
-          }}
-        />
+        <span className="fa fa-close close" onClick={this.close} />
         <div className="cover col-md-12 col-lg-2">
           <img src={manga.cover} alt="Cover" />
         </div>
