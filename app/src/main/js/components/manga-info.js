@@ -3,11 +3,14 @@ import classNames from "classnames";
 import { withRouter } from "react-router-dom";
 
 import "../../res/scss/manga-info.scss";
+import ChaptersSelector from "./chapters-selector";
 
 class MangaInfo extends Component {
   state = { isClosing: false };
   render() {
-    let { manga, onClickClose, onClickAdd, history } = { ...this.props };
+    let { manga, onClickClose, onClickAdd, history, selectedChapters } = {
+      ...this.props
+    };
     return (
       <div
         className={classNames("manga-info", "row", "animated", "slideInUp", {
@@ -59,56 +62,18 @@ class MangaInfo extends Component {
               flank corned beef meatloaf.
             </em>
           </div>
-          <div className="chapters mt-4">
-            <div className="header-item col-lg d-flex">
-              <span className="col-sm">Chapters</span>
-              <div className="float-right">
-                <button type="button" className="btn btn-sm">
-                  <span className="fa fa-check mr-2" />Select all
-                </button>
-                |
-                <button type="button" className="btn btn-sm">
-                  <span className="fa fa-times mr-2" />Unselect all
-                </button>
-              </div>
-            </div>
-            <div className="list-group row chapters-list">
-              {manga.chapters.map((chapter, id) => (
-                <a
-                  className="list-group-item list-group-item-action d-flex align-items-center col-md-6 col-lg-4"
-                  key={id}>
-                  <span className="count">{id}</span>
-                  <span className="col-lg">{chapter}</span>
-                </a>
-              ))}
-            </div>
-            <div className="range">
-              <div className="form-group row ml-0 mr-0 mt-2">
-                <label className="col-form-label">From</label>
-                <div className="mt-1 ml-2 mr-2">
-                  <input
-                    type="number"
-                    className="form-control form-control-sm"
-                  />
-                </div>
-                <label className="col-form-label">To</label>
-                <div className="mt-1 ml-2">
-                  <input
-                    type="number"
-                    className="form-control form-control-sm"
-                  />
-                </div>
-              </div>
-            </div>
+          <div className="mt-4">
+            <ChaptersSelector chapters={manga.chapters} />
           </div>
           <div className="actions float-right">
             <button
               type="button"
               className="btn btn-success"
               onClick={() => {
-                onClickAdd(manga.id, [1, 2, 3, 4]);
+                onClickAdd(manga.id, selectedChapters);
                 history.push("/downloads");
-              }}>
+              }}
+              disabled={selectedChapters.length == 0}>
               <span className="fa fa-plus-circle mr-1" />Add to queue
             </button>
             <button type="button" className="btn btn-outline-warning">

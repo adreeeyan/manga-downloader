@@ -1,0 +1,76 @@
+@import "~bootswatch/dist/superhero/variables";
+
+.chapters-selector {
+  padding: 0;
+  border: 0;
+
+  .header-item {
+    background-color: $secondary;
+    padding: 5px;
+
+    > span {
+      align-self: center;
+    }
+
+    button {
+      background-color: unset;
+    }
+  }
+
+  .chapters-list {
+    max-height: 250px;
+    overflow: auto;
+    background-color: $gray-900;
+    flex-direction: row;
+    margin-left: 0;
+    margin-right: 0;
+
+    .count {
+      padding: 7px;
+    }
+
+    .list-group-item {
+      padding: 0;
+      border: 0;
+      background-color: $gray-900;
+      font-size: 0.8rem;
+      cursor: pointer;
+
+      .checked {
+        display: none;
+        color: $success;
+      }
+      &.active {
+        .checked {
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  .range {
+    font-size: 0.8rem;
+
+    input {
+      padding: 0;
+      color: $white;
+      background-color: rgba($gray-100, 0.1);
+      border: 0;
+      border-bottom: 2px solid $white;
+      max-width: 55px;
+      padding-left: 5px;
+    }
+    
+    button {
+      font-size: 0.75rem;
+      height: 23px;
+      margin-left: 5px;
+      margin-top: 5px;
+      display: flex;
+
+      span:last-of-type {
+        margin-top: -3px;
+      }
+    }
+  }
+}

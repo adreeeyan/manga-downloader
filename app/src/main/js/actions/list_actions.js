@@ -28,4 +28,23 @@ export const downloadManga = (mangaId, chapters) => ({
   type: LIST_ACTIONS.DOWNLOAD_MANGA,
   mangaId,
   chapters
-})
+});
+
+export const toggleChapter = id => ({
+  type: LIST_ACTIONS.CHAPTER_TOGGLE,
+  id
+});
+
+export const selectAllChapters = chapters => ({
+  type: LIST_ACTIONS.CHAPTER_SELECT_ALL,
+  chapters
+});
+
+export const unselectAllChapters = () => ({
+  type: LIST_ACTIONS.CHAPTER_UNSELECT_ALL
+});
+
+export const selectChapters = chapters => ({
+  type: LIST_ACTIONS.CHAPTER_SELECT_RANGE,
+  chapters
+});
