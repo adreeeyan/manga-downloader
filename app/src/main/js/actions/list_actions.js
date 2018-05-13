@@ -24,9 +24,9 @@ export const setFilterValue = value => ({
   value
 });
 
-export const downloadManga = (mangaId, chapters) => ({
+export const downloadManga = (id, chapters) => ({
   type: LIST_ACTIONS.DOWNLOAD_MANGA,
-  mangaId,
+  id,
   chapters
 });
 
@@ -47,4 +47,15 @@ export const unselectAllChapters = () => ({
 export const selectChapters = chapters => ({
   type: LIST_ACTIONS.CHAPTER_SELECT_RANGE,
   chapters
+});
+
+export const setDownloadMangaStatusFilter = status => ({
+  type: LIST_ACTIONS.SET_DOWNLOAD_MANGA_FILTER_VALUE,
+  status
+});
+
+export const setDownloadMangaStatus = (id, status) => ({
+  type: LIST_ACTIONS.SET_DOWNLOAD_MANGA_STATUS,
+  id,
+  status
 });

@@ -58,7 +58,7 @@ const ChaptersSelector = ({
             )}
             key={id}
             onClick={() => toggleChapter(chapter.id)}>
-            <span className="count">{chapter.id}</span>
+            <span className="col-sm-1 count">{chapter.id}</span>
             <span className="col-lg">{chapter.title}</span>
             <span className="fa fa-check checked mr-2" />
           </span>

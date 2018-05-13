@@ -71,8 +71,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onClickClose: () => dispatch(selectMangaForDownload(null)),
-  onClickAdd: (mangaId, chapters) => {
-    dispatch(downloadManga(mangaId, chapters));
+  onClickAdd: (id, chapters) => {
+    dispatch(downloadManga(id, chapters));
     dispatch(selectMangaForDownload(null));
     dispatch(selectChapters(null));
   }
