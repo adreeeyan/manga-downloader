@@ -16,6 +16,10 @@
   "license": "MIT",
   "build": {
     "productName": "Baruch: Manga downloader",
+    "asar": false,
+    "files": [
+      "app/build"
+    ],
     "win": {
       "target": "NSIS"
     },

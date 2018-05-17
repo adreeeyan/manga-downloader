@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.17.4"
+  },
+  "dependencies": {
+    "baruch-manga-provider": "0.0.7",
+    "express": "^4.16.3"
+  }
+}
