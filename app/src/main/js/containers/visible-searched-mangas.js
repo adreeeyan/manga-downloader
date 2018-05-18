@@ -3,18 +3,22 @@ import _ from "lodash";
 import SearchResults from "../components/search-results";
 import { selectMangaForDownload } from "../actions/list_actions";
 
-const createCollection = (mangas, searchValue) => {
-  const output = _(mangas)
-    .filter(manga => manga.title.indexOf(searchValue) != -1)
-    .groupBy(manga => manga.source)
-    .map((value, key) => ({ source: key, mangas: value }))
-    .value();
-  return output;
+const filterManga = (mangas, searchValue) => {
+  const filtered = mangas.map(m => {
+    return {
+      source: m.source,
+      mangas: m.mangas.filter(manga => _.includes(manga.title.toLowerCase(), searchValue.toLowerCase()))
+    }
+  });
+  return filtered;
 };
 
 const mapStateToProps = state => ({
   collection: (() => {
-    return createCollection(state.mangas, state.searchValue);
+    if(_.isEmpty(state.searchValue) || state.searchValue.length < 3){
+      return [];
+    }
+    return filterManga(state.mangas, state.searchValue);
   })()
 });
 

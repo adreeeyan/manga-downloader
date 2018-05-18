@@ -19,6 +19,11 @@ export const clearManga = () => ({
   type: LIST_ACTIONS.MANGA_CLEAR
 });
 
+export const updateList = (list) => ({
+  type: LIST_ACTIONS.MANGA_UPDATE_LIST,
+  list
+});
+
 export const setFilterValue = value => ({
   type: LIST_ACTIONS.SET_FILTER_VALUE,
   value

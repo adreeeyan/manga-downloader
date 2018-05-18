@@ -1,6 +1,8 @@
 .search-item {
-  max-height: 300px;
-  max-width: 300px;
+  max-height: 250px;
+  min-height: 250px;
+  max-width: 200px;
+  min-width: 200px;
   display: flex;
   flex-grow: 1;
   flex-direction: column;
@@ -9,8 +11,26 @@
   text-align: center;
   margin: 10px;
 
+  .card-img-top {
+    overflow: hidden;
+    flex-grow: 5;
+  }
+
   &:hover {
     cursor: pointer;
+  }
+
+  .card-body {
+    padding: 10px 5px 10px 5px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+
+    .card-title {
+      font-size: 1rem;
+      margin: 0;
+    }
   }
 }
 

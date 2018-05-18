@@ -11,6 +11,10 @@ const mangas = (state = DEFAULT_STATE.mangas, action) => {
           ...action.manga
         }
       ];
+    case LIST_ACTIONS.MANGA_UPDATE_LIST:
+      return [
+        ...action.list
+      ];
     case LIST_ACTIONS.MANGA_SEARCH:
       return state.filter(m => m.title.indexOf(action.title) != -1);
     default:
