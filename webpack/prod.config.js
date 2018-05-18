@@ -1,3 +1,6 @@
+const fs = require("fs");
+const gracefulFs = require("graceful-fs");
+gracefulFs.gracefulify(fs);
 const webpack = require("webpack");
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -67,6 +70,10 @@ module.exports = {
       {
         from: "./src/main/index.html",
         to: path.join(__dirname, "../app/build")
+      },
+      {
+        from: "./src/main/server",
+        to: path.join(__dirname, "../app/build/server")
       }
     ])
   ]
