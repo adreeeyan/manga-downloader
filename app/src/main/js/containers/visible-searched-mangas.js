@@ -4,12 +4,15 @@ import SearchResults from "../components/search-results";
 import { selectMangaForDownload } from "../actions/list_actions";
 
 const filterManga = (mangas, searchValue) => {
-  const filtered = mangas.map(m => {
+  // filter via title
+  const mapped = mangas.map(m => {
     return {
       source: m.source,
       mangas: m.mangas.filter(manga => _.includes(manga.title.toLowerCase(), searchValue.toLowerCase()))
     }
   });
+  // remove sources with empty mangas
+  const filtered = mapped.filter(m => m.mangas.length != 0);
   return filtered;
 };
 

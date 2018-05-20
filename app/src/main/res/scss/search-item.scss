@@ -1,8 +1,8 @@
 .search-item {
   max-height: 250px;
   min-height: 250px;
-  max-width: 200px;
-  min-width: 200px;
+  max-width: 200px !important;
+  min-width: 200px !important;
   display: flex;
   flex-grow: 1;
   flex-direction: column;
