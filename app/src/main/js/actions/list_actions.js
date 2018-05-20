@@ -35,9 +35,9 @@ export const downloadManga = (id, chapters) => ({
   chapters
 });
 
-export const toggleChapter = id => ({
+export const toggleChapter = index => ({
   type: LIST_ACTIONS.CHAPTER_TOGGLE,
-  id
+  index
 });
 
 export const selectAllChapters = chapters => ({

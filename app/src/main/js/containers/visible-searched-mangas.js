@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import _ from "lodash";
 import SearchResults from "../components/search-results";
-import { selectMangaForDownload, setIsMangaFetchingStatus } from "../actions/list_actions";
+import { selectMangaForDownload, setIsMangaFetchingStatus, selectAllChapters } from "../actions/list_actions";
 import MangaServices from "../services/manga-services";
 
 const filterManga = (mangas, searchValue) => {
@@ -30,8 +30,9 @@ const mapDispatchToProps = dispatch => ({
   selectManga: async location => {
     dispatch(setIsMangaFetchingStatus(true));
     const manga = await getMangaInfo(location);
-    console.log("mangaaaaaaaaaaa", manga);
     dispatch(selectMangaForDownload(manga));
+    const chaptersId = manga.chapters.map(m => m.index);
+    dispatch(selectAllChapters(chaptersId));
     dispatch(setIsMangaFetchingStatus(false));
   }
 });
@@ -42,12 +43,7 @@ const getMangaInfo = async location => {
   }
 
   const manga = await MangaServices.getManga(location);
-
-  const chapters = [...Array(20).keys()].map(id => ({
-    id: id + 1,
-    title: `Chaptero ${id + 1}`
-  }));
-  
+  const chapters = await MangaServices.getChapters(location);
   manga.chapters = chapters;
   return manga;
 };

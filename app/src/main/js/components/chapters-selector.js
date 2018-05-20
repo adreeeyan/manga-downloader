@@ -19,8 +19,8 @@ const ChaptersSelector = ({
   unselectAll,
   selectChapters
 }) => {
-  const isSelected = id => {
-    return selectedChapters.indexOf(id) != -1;
+  const isSelected = index => {
+    return selectedChapters.indexOf(index) != -1;
   };
   let rangeFrom, rangeTo;
   return (
@@ -53,12 +53,12 @@ const ChaptersSelector = ({
               "align-items-center",
               "col-md-6 col-lg-4",
               {
-                active: isSelected(chapter.id)
+                active: isSelected(chapter.index)
               }
             )}
             key={id}
-            onClick={() => toggleChapter(chapter.id)}>
-            <span className="col-sm-1 count">{chapter.id}</span>
+            onClick={() => toggleChapter(chapter.index)}>
+            <span className="col-sm-1 count">{chapter.index}</span>
             <span className="col-lg">{chapter.title}</span>
             <span className="fa fa-check checked mr-2" />
           </span>
@@ -89,7 +89,12 @@ const ChaptersSelector = ({
           <button
             type="button"
             className="btn btn-outline-success btn-sm"
-            onClick={() => selectChapters(parseInt(rangeFrom.value), parseInt(rangeTo.value) + 1)}>
+            onClick={() =>
+              selectChapters(
+                parseInt(rangeFrom.value),
+                parseInt(rangeTo.value) + 1
+              )
+            }>
             <span className="fa fa-list mr-1" />
             <span>Select these chapters</span>
           </button>
@@ -100,16 +105,13 @@ const ChaptersSelector = ({
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  selectedChapters:
-    state.selectedChapters == null
-      ? ownProps.chapters.map(c => c.id)
-      : state.selectedChapters
+  selectedChapters: state.selectedChapters
 });
 
 const mapDispatchToProps = dispatch => ({
-  toggleChapter: id => dispatch(toggleChapter(id)),
+  toggleChapter: index => dispatch(toggleChapter(index)),
   selectAll: chapters =>
-    dispatch(selectAllChapters(chapters.map(chapter => chapter.id))),
+    dispatch(selectAllChapters(chapters.map(chapter => chapter.index))),
   unselectAll: () => dispatch(unselectAllChapters()),
   selectChapters: (from, to) => dispatch(selectChapters(_.range(from, to)))
 });

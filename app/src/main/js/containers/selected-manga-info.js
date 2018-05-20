@@ -19,7 +19,6 @@ const SelectedMangaInfo = ({
 }) => {
   return (
     <div>
-      {console.log("halaaaaaaaaaaaaaaaaa", isFetching, manga)}
       {!isFetching && manga != null && (
         <MangaInfo
           manga={manga}
@@ -36,20 +35,10 @@ const SelectedMangaInfo = ({
   );
 };
 
-const getSelectedChapters = async state => {
-  // if (state.selectedMangaForDownload == null) {
-  //   return [];
-  // }
-  // return state.selectedChapters == null
-  //   ? (await getMangaInfo(state.selectedMangaForDownload)).chapters.map(c => c.id)
-  //   : state.selectedChapters;
-  return [];
-};
-
 const mapStateToProps = state => ({
   isFetching: state.isFetchingManga,
   manga: state.selectedMangaForDownload,
-  selectedChapters: getSelectedChapters(state)
+  selectedChapters: state.selectedChapters
 });
 
 const mapDispatchToProps = dispatch => ({

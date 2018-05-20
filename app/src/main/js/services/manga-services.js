@@ -11,6 +11,12 @@ const getManga = async (location) => {
     return manga.json();
 };
 
+const getChapters = async (location) => {
+    const l = encryptParam(location);
+    const chapters = await fetch(`${SERVER_URL}/chapter/${l}`);
+    return chapters.json();
+};
+
 const updateMangaProviders = async () => {
     return await fetch(`${SERVER_URL}/provider`, {
         method: "POST",
@@ -25,6 +31,7 @@ const encryptParam = (param) => {
 const MangaService = {
     searchManga,
     getManga,
+    getChapters,
     updateMangaProviders
 };
 
