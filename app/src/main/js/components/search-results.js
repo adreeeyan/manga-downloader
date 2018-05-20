@@ -11,9 +11,7 @@ const SearchResults = ({ collection = [], selectManga = {} }) => (
         <hr />
         <div className="row rows">
           {c.mangas.map((manga, key) => (
-            <div className="" key={key}>
-              <SearchItem {...manga} onClick={() => selectManga(manga.location)} />
-            </div>
+            <SearchItem {...manga} onClick={() => selectManga(manga.location)} key={key}/>
           ))}
         </div>
       </div>

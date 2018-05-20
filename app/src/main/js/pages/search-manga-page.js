@@ -9,16 +9,21 @@ import MangaInfo from "../components/manga-info";
 import SelectedMangaInfo from "../containers/selected-manga-info";
 
 export class SearchMangaPage extends React.Component {
+
+  triggerCheck = () => {
+    checkElementsInViewport()
+  };
+
   componentDidMount() {
     document
       .getElementsByClassName("content")[0]
-      .addEventListener("scroll", checkElementsInViewport);
+      .addEventListener("scroll", this.triggerCheck);
   }
 
   componentWillUnmount() {
     document
       .getElementsByClassName("content")[0]
-      .removeEventListener("scroll", checkElementsInViewport);
+      .removeEventListener("scroll", this.triggerCheck);
   }
 
   render() {
