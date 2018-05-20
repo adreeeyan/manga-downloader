@@ -24,25 +24,25 @@ exports.getMangas = async (req, res) => {
   } else {
     mangas = await MangaProvider.search("");
   }
-  res.json(mangas);
+  await res.json(mangas);
 };
 
 exports.getMangaInfo = async (req, res) => {
   const location = decryptParam(req.params.mangaLocation);
   const manga = await MangaProvider.getMangaInfo(location);
-  res.json(manga);
+  await res.json(manga);
 };
 
 exports.getChapters = async (req, res) => {
   const location = decryptParam(req.params.mangaLocation);
   const chapters = await MangaProvider.getChapters(location);
-  res.json(chapters);
+  await res.json(chapters);
 };
 
 exports.getPages = async (req, res) => {
   const location = decryptParam(req.params.chapterLocation);
   const pages = await MangaProvider.getPages(location);
-  res.json(pages);
+  await res.json(pages);
 };
 
 const decryptParam = param => {

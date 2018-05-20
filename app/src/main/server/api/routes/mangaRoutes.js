@@ -1,5 +1,6 @@
 module.exports = function(app) {
     const mangaCtrl = require("../controllers/mangaController");
+    const downloadCtrl = require("../controllers/downloadController");
 
     app
         .route("/manga")
@@ -20,4 +21,8 @@ module.exports = function(app) {
     app
         .route("/provider")
         .post(mangaCtrl.updateMangaProviders)
+
+    app
+        .route("/download")
+        .post(downloadCtrl.save)
 };
