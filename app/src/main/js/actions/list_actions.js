@@ -69,3 +69,13 @@ export const setIsMangaFetchingStatus = status => ({
   type: LIST_ACTIONS.SET_MANGA_INFO_IS_FETCHING,
   status
 });
+
+export const setGlobalMessage = message => ({
+  type: LIST_ACTIONS.SET_GLOBAL_MESSAGE,
+  message
+});
+
+export const removeGlobalMessage = message => ({
+  type: LIST_ACTIONS.REMOVE_GLOBAL_MESSAGE,
+  message
+});

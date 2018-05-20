@@ -1,0 +1,13 @@
+@import "~bootswatch/dist/superhero/variables";
+
+.global-loading-indicator {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    background-color: rgba($gray-900, 0.95);
+    z-index: 100000;
+}

@@ -51,6 +51,8 @@ const ChaptersSelector = ({
               "list-group-item-action",
               "d-flex",
               "align-items-center",
+              "mt-1",
+              "mb-1",
               "col-md-6 col-lg-4",
               {
                 active: isSelected(chapter.index)

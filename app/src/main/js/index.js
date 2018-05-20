@@ -7,7 +7,7 @@ import { AppContainer } from "react-hot-loader";
 import reducers from "./reducers/index";
 import App from "./app";
 import MangaServices from "./services/manga-services";
-import { updateList } from "./actions/list_actions";
+import { updateList, setGlobalMessage, removeGlobalMessage } from "./actions/list_actions";
 
 /*
 Here we are getting the initial state injected by the server. See routes/index.js for more details
@@ -17,10 +17,10 @@ const initialState = window.__INITIAL_STATE__; // eslint-disable-line
 const store = createStore(reducers, initialState);
 
 // get initial mangas
-MangaServices.searchManga("").then((list) => {
-  console.log("Finished updating the manga providers", list);    
+store.dispatch(setGlobalMessage("Updating manga providers..."));
+MangaServices.searchManga("").then((list) => { 
   store.dispatch(updateList(list));
-  alert("Finished updating list");
+  store.dispatch(removeGlobalMessage());
 });;
 
 /*

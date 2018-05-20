@@ -50,7 +50,7 @@ class MangaInfo extends Component {
           <LoadingIndicator description="Retrieving manga info..." />
         )}
         {!isFetchingManga && (
-          <div className="row">
+          <div className="row w-100">
             <div className="cover col-md-12 col-lg-2">
               <img src={manga.cover} alt="Cover" />
             </div>

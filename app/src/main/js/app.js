@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Route, HashRouter, Switch } from "react-router-dom";
 import PageTransition from "react-router-page-transition";
 
@@ -7,9 +8,10 @@ import EmptyListPlaceholder from "./components/emptylist-placeholder";
 import DownloadListPage from "./pages/download-list-page";
 import SearchMangaPage from "./pages/search-manga-page";
 
+import GlobalLoadingIndicator from "./components/global-loading-indicator";
 import "../res/scss/app.scss";
 
-const App = () => (
+const App = ({ globalMessage = "" }) => (
   <HashRouter>
     <div className="app">
       <NavBar />
@@ -26,8 +28,13 @@ const App = () => (
           )}
         />
       </div>
+      {globalMessage && <GlobalLoadingIndicator description={globalMessage} />}
     </div>
   </HashRouter>
 );
 
-export default App;
+const mapStateToProps = state => ({
+  globalMessage: state.globalMessage
+});
+
+export default connect(mapStateToProps)(App);
