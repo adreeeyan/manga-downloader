@@ -21,6 +21,13 @@ class MangaInfo extends Component {
     }
   }
 
+  spreadValues = (values) => {
+    if(!values){
+      return "";
+    }
+    return values.join(", ");
+  }
+
   componentDidMount() {
     document.addEventListener("keydown", this.escFunction, false);
   }
@@ -33,6 +40,7 @@ class MangaInfo extends Component {
     let { manga, onClickClose, onClickAdd, history, selectedChapters } = {
       ...this.props
     };
+    console.log("manga", manga);
     return (
       <div
         className={classNames("manga-info", "row", "animated", "slideInUp", {
@@ -45,22 +53,22 @@ class MangaInfo extends Component {
         <div className="info col-md-12 col-lg">
           <h4>{manga.title}</h4>
           <h6>
-            <em>{manga.author}</em>
+            <em>{this.spreadValues(manga.authors)}</em>
           </h6>
           <div>
             <h6>
-              {manga.chapters.length} chapters |{" "}
+              {manga.chapters.length} chapters | {" "}
               <span className="badge badge-primary">{manga.status}</span>
             </h6>
           </div>
           <div className="mt-4 mb-4 other-info">
             <div className="row other-title">
               <strong className="col-sm-2 col-lg-2">Other title</strong>
-              <span className="col-sm col-lg">{manga.alternativeTitle}</span>
+              <span className="col-sm col-lg">{this.spreadValues(manga.alternative_titles)}</span>
             </div>
             <div className="row genre">
               <strong className="col-sm-2 col-lg-2">Genre</strong>
-              <span className="col-sm col-lg">{manga.genre}</span>
+              <span className="col-sm col-lg">{this.spreadValues(manga.genres)}</span>
             </div>
           </div>
           <div className="summary text-center">
@@ -68,14 +76,7 @@ class MangaInfo extends Component {
               <strong>Summary</strong>
             </h6>
             <em>
-              Bacon ipsum dolor amet pastrami alcatra porchetta biltong
-              turducken. Short ribs drumstick burgdoggen jowl meatloaf doner pig
-              corned beef venison ribeye. Shoulder jerky rump short ribs bacon
-              shankle. Tri-tip spare ribs doner strip steak, shoulder boudin
-              corned beef drumstick meatloaf andouille flank. Shank bacon pork
-              loin, ball tip chicken tail jowl venison jerky biltong sirloin pig
-              andouille swine. Swine spare ribs salami kielbasa meatball fatback
-              flank corned beef meatloaf.
+              {manga.summary}
             </em>
           </div>
           <div className="mt-4">

@@ -1,8 +1,8 @@
 import { LIST_ACTIONS } from '../consts/action_types';
 
-export const selectMangaForDownload = id => ({
+export const selectMangaForDownload = manga => ({
   type: LIST_ACTIONS.MANGA_SELECT_FOR_DOWNLOAD,
-  id
+  manga
 });
 
 export const addManga = manga => ({
@@ -62,5 +62,10 @@ export const setDownloadMangaStatusFilter = status => ({
 export const setDownloadMangaStatus = (id, status) => ({
   type: LIST_ACTIONS.SET_DOWNLOAD_MANGA_STATUS,
   id,
+  status
+});
+
+export const setIsMangaFetchingStatus = status => ({
+  type: LIST_ACTIONS.SET_MANGA_INFO_IS_FETCHING,
   status
 });

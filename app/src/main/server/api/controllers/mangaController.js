@@ -18,26 +18,33 @@ exports.updateMangaProviders = async (req, res) => {
 // };
 
 exports.getMangas = async (req, res) => {
-    let mangas = [];
-    if(req.query.title){
-        mangas = await MangaProvider.search(req.query.title);
-    }else{
-        mangas = await MangaProvider.search("");
-    }
-    res.json(mangas);
+  let mangas = [];
+  if (req.query.title) {
+    mangas = await MangaProvider.search(req.query.title);
+  } else {
+    mangas = await MangaProvider.search("");
+  }
+  res.json(mangas);
 };
 
 exports.getMangaInfo = async (req, res) => {
-  const manga = await MangaProvider.getMangaInfo(req.params.manga);
+  const location = decryptParam(req.params.mangaLocation);
+  const manga = await MangaProvider.getMangaInfo(location);
   res.json(manga);
 };
 
 exports.getChapters = async (req, res) => {
-  const chapters = await MangaProvider.getChapters(req.params.manga);
+  const location = decryptParam(req.params.mangaLocation);
+  const chapters = await MangaProvider.getChapters(location);
   res.json(chapters);
 };
 
 exports.getPages = async (req, res) => {
-  const pages = await MangaProvider.getPages(req.params.chapter);
+  const location = decryptParam(req.params.chapterLocation);
+  const pages = await MangaProvider.getPages(location);
   res.json(pages);
+};
+
+const decryptParam = param => {
+  return new Buffer(param, "base64").toString("binary");
 };

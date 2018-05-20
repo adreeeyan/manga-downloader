@@ -1,7 +1,7 @@
 import { LIST_ACTIONS } from "../consts/action_types";
 import DEFAULT_STATE from "../consts/default_state";
 
-const mangas = (state = DEFAULT_STATE.mangas, action) => {
+export const mangas = (state = DEFAULT_STATE.mangas, action) => {
   console.log("manga action", action, "state", state);
   switch (action.type) {
     case LIST_ACTIONS.MANGA_ADD:
@@ -22,4 +22,12 @@ const mangas = (state = DEFAULT_STATE.mangas, action) => {
   }
 };
 
-export default mangas;
+export const selectedMangaForDownload = (state = null, action) => {
+  console.log("select action", action, "state", state);
+  switch (action.type) {
+    case LIST_ACTIONS.MANGA_SELECT_FOR_DOWNLOAD:
+      return action.manga;
+    default:
+      return state;
+  }
+};

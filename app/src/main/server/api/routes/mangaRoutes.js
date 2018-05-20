@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  var mangaCtrl = require("../controllers/mangaController");
+    const mangaCtrl = require("../controllers/mangaController");
 
     app
         .route("/manga")

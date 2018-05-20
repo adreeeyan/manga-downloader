@@ -1,10 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
+import { checkElementsInViewport } from "react-lazy";
+
 import SearchBar from "../containers/searchbar";
 import SearchResults from "../components/search-results";
 import VisibleSearchedMangas from "../containers/visible-searched-mangas";
 import MangaInfo from "../components/manga-info";
 import SelectedMangaInfo from "../containers/selected-manga-info";
-import { checkElementsInViewport } from "react-lazy";
 
 export class SearchMangaPage extends React.Component {
   componentDidMount() {
@@ -30,10 +32,14 @@ export class SearchMangaPage extends React.Component {
         <div className="results">
           <VisibleSearchedMangas />
         </div>
-        <SelectedMangaInfo />
+        {this.props.hasSelectedManga && <SelectedMangaInfo />}
       </div>
     );
   }
 }
 
-export default SearchMangaPage;
+const mapStateToProps = state => ({
+  hasSelectedManga: !!state.selectedMangaForDownload
+});
+
+export default connect(mapStateToProps)(SearchMangaPage);

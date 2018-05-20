@@ -1,6 +1,5 @@
 import React from "react";
 import SearchItem from "./search-item";
-import MangaInfo from "./manga-info";
 
 import "../../res/scss/search-results.scss";
 
@@ -13,7 +12,7 @@ const SearchResults = ({ collection = [], selectManga = {} }) => (
         <div className="row rows">
           {c.mangas.map((manga, key) => (
             <div className="" key={key}>
-              <SearchItem {...manga} onClick={() => selectManga(manga.id)} />
+              <SearchItem {...manga} onClick={() => selectManga(manga.location)} />
             </div>
           ))}
         </div>
