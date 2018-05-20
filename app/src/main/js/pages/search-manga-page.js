@@ -32,14 +32,15 @@ export class SearchMangaPage extends React.Component {
         <div className="results">
           <VisibleSearchedMangas />
         </div>
-        {this.props.hasSelectedManga && <SelectedMangaInfo />}
+        {(this.props.isFetchingManga || this.props.hasSelectedManga) && <SelectedMangaInfo />}
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  hasSelectedManga: !!state.selectedMangaForDownload
+  hasSelectedManga: !!state.selectedMangaForDownload,
+  isFetchingManga: state.isFetchingManga
 });
 
 export default connect(mapStateToProps)(SearchMangaPage);

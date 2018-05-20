@@ -6,12 +6,13 @@ import {
   selectMangaForDownload,
   downloadManga,
   selectChapters,
-  unselectAllChapters
+  unselectAllChapters,
+  setIsMangaFetchingStatus
 } from "../actions/list_actions";
 import MangaServices from "../services/manga-services";
 
 const SelectedMangaInfo = ({
-  isFetching,
+  isFetchingManga,
   manga,
   onClickClose,
   onClickAdd,
@@ -19,30 +20,32 @@ const SelectedMangaInfo = ({
 }) => {
   return (
     <div>
-      {!isFetching && manga != null && (
-        <MangaInfo
-          manga={manga}
-          onClickClose={() => {
-            setTimeout(() => {
-              onClickClose();
-            }, 500);
-          }}
-          onClickAdd={onClickAdd}
-          selectedChapters={selectedChapters}
-        />
-      )}
+      <MangaInfo
+        manga={manga}
+        onClickClose={() => {
+          setTimeout(() => {
+            onClickClose();
+          }, 500);
+        }}
+        onClickAdd={onClickAdd}
+        selectedChapters={selectedChapters}
+        isFetchingManga={isFetchingManga}
+      />
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  isFetching: state.isFetchingManga,
+  isFetchingManga: state.isFetchingManga,
   manga: state.selectedMangaForDownload,
   selectedChapters: state.selectedChapters
 });
 
 const mapDispatchToProps = dispatch => ({
-  onClickClose: () => dispatch(selectMangaForDownload(null)),
+  onClickClose: () => {
+    dispatch(setIsMangaFetchingStatus(false))
+    dispatch(selectMangaForDownload(null));
+  },
   onClickAdd: (id, chapters) => {
     dispatch(downloadManga(id, chapters));
     dispatch(selectMangaForDownload(null));
