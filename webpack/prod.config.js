@@ -11,8 +11,9 @@ module.exports = {
   context: path.join(__dirname, "../app"),
   devtool: "source-map",
   entry: {
-    app: ["./src/main/js/index.js", "./src/main/res/scss/main.scss"]
+    app: ["babel-polyfill", "./src/main/js/index.js", "./src/main/res/scss/main.scss"]
   },
+  target: "node",
   mode: "production",
   output: {
     path: path.resolve(__dirname, "../app/build"),
@@ -50,6 +51,9 @@ module.exports = {
         loader: "file-loader"
       }
     ]
+  },
+  node: {
+    fs: "empty"
   },
   plugins: [
     new webpack.DefinePlugin({

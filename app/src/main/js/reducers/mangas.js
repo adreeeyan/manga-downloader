@@ -22,6 +22,18 @@ export const mangas = (state = DEFAULT_STATE.mangas, action) => {
   }
 };
 
+export const allMangas = (state = DEFAULT_STATE.mangas, action) => {
+  console.log("allMangas action", action, "state", state);
+  switch (action.type) {
+    case LIST_ACTIONS.ALL_MANGA_UPDATE_LIST:
+      return [
+        ...action.list
+      ];
+    default:
+      return state;
+  }
+};
+
 export const selectedMangaForDownload = (state = null, action) => {
   console.log("select action", action, "state", state);
   switch (action.type) {

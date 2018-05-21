@@ -81,12 +81,14 @@
   },
   "dependencies": {
     "animate.css": "^3.6.1",
+    "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
     "bootswatch": "^4.1.1",
     "classnames": "^2.2.5",
     "font-awesome": "^4.7.0",
     "history": "^4.7.2",
     "lodash": "^4.17.10",
+    "mkdirp": "^0.5.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-lazy": "^0.5.1",
@@ -94,6 +96,7 @@
     "react-router": "4.2.0",
     "react-router-dom": "4.2.2",
     "react-router-page-transition": "^3.1.0",
-    "redux": "^4.0.0"
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.2.0"
   }
 }

@@ -11,6 +11,10 @@ module.exports = function(app) {
         .get(mangaCtrl.getMangaInfo)
 
     app
+        .route("/source/:mangaLocation")
+        .get(mangaCtrl.getSourceFromLocation)
+
+    app
         .route("/chapter/:mangaLocation")
         .get(mangaCtrl.getChapters)
 

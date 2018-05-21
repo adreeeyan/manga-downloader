@@ -15,9 +15,9 @@ let mainWindow;
 function createWindow() {
   // Create the browser window.
   if(process.env.NODE_ENV === "development"){
-    mainWindow = new BrowserWindow({ width: 1300, height: 700 });
+    mainWindow = new BrowserWindow({ width: 1500, height: 700 });
   }else{
-    mainWindow = new BrowserWindow({ width: 1000, height: 700 });    
+    mainWindow = new BrowserWindow({ width: 1300, height: 700 });    
   }
 
   // and load the index.html of the app.
@@ -31,7 +31,7 @@ function createWindow() {
 
   if (process.env.NODE_ENV === "development") {
     // Open the DevTools.
-    mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();    
     const {
       default: installExtension,
       REACT_DEVELOPER_TOOLS,
@@ -55,10 +55,36 @@ function createWindow() {
   });
 }
 
+// The real start app
+const startApp = () => {
+  const serverProc = require("child_process").fork(
+    require.resolve("./server/server.js"),
+    [],
+    { silent: true }
+  );
+  serverProc.stdout.on("data", (data) => {
+    const serverOutput = data.toString("utf8");
+    // check if server started the API already
+    if(serverOutput.indexOf("Manga provider API started") != -1)
+    {
+      // create the window
+      createWindow();
+    }
+    // output from server
+    console.log("server process", serverOutput);
+  });
+  serverProc.on("exit", (code, sig) => {
+    // finishing
+  });
+  serverProc.on("error", error => {
+    // error handling
+  });
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on("ready", createWindow);
+app.on("ready", startApp);
 
 // Quit when all windows are closed.
 app.on("window-all-closed", () => {
@@ -73,18 +99,9 @@ app.on("activate", () => {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
-    createWindow();
+    startApp();
   }
 });
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-const serverProc = require("child_process").fork(
-  require.resolve("./server/server.js")
-);
-serverProc.on("exit", (code, sig) => {
-  // finishing
-});
-serverProc.on("error", error => {
-  // error handling
-});

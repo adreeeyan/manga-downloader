@@ -45,6 +45,11 @@ exports.getPages = async (req, res) => {
   await res.json(pages);
 };
 
+exports.getSourceFromLocation = async (req, res) => {
+  const location = decryptParam(req.params.mangaLocation);
+  return res.json(MangaProvider.getSourceFromLocation(location));
+};
+
 const decryptParam = param => {
   return new Buffer(param, "base64").toString("binary");
 };

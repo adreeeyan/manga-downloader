@@ -6,7 +6,7 @@ import { setDownloadMangaStatus } from "../actions/list_actions";
 const DownloadsList = ({ mangas, setFilter }) => (
   <div className="row">
     {mangas.map((manga, key) => (
-      <div className="col-sm-12 col-lg" key={key}>
+      <div className="col-sm-12 col-lg-6" key={key}>
         <DownloadItem manga={manga} setFilter={setFilter} />
       </div>
     ))}

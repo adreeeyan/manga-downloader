@@ -7,16 +7,16 @@ const DownloadItem = ({ manga, setFilter }) => (
   <div className="download-item">
     <div className="row align-items-center">
       <div className="cover">
-        <img src="http://via.placeholder.com/150x150" alt="Cover" />
+        <img src={manga.info.cover} alt="Cover" />
       </div>
       <div className="col-sm">
-        <h5>Manga title #{manga.id}</h5>
+        <h5>{manga.info.title}</h5>
         <h6>
-          <em>- Author name</em>
+          <em>- {manga.info.authors}</em>
         </h6>
         <div className="chapters">
           <small>
-            Downloaded <strong>1</strong> of{" "}
+            Downloaded <strong>{manga.downloaded.length}</strong> of&nbsp;
             <strong>{manga.chapters.length}</strong> chapters
           </small>
         </div>
@@ -24,7 +24,7 @@ const DownloadItem = ({ manga, setFilter }) => (
           <div
             className="progress-bar progress-bar-striped progress-bar-animated"
             role="progressbar"
-            style={{ width: "75%" }}
+            style={{ width: parseInt(manga.downloaded.length / manga.chapters.length * 100) + "%" }}
           />
         </div>
         <div className="actions mt-3">

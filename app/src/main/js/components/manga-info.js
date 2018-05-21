@@ -51,7 +51,7 @@ class MangaInfo extends Component {
         )}
         {!isFetchingManga && (
           <div className="row w-100">
-            <div className="cover col-md-12 col-lg-2">
+            <div className="cover col-md-12 col-lg-3">
               <img src={manga.cover} alt="Cover" />
             </div>
             <div className="info col-md-12 col-lg">
@@ -93,7 +93,7 @@ class MangaInfo extends Component {
                   type="button"
                   className="btn btn-success"
                   onClick={() => {
-                    onClickAdd(manga.id, selectedChapters);
+                    onClickAdd(manga, "/mnt/data/stuff/manga", selectedChapters);
                     history.push("/downloads");
                   }}
                   disabled={selectedChapters.length == 0}>

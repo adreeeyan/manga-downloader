@@ -8,15 +8,23 @@ const downloadManga = (state = [], action) => {
       return [
         ...state,
         {
-          id: action.id,
+          info: action.info,
+          location: action.location,
           chapters: action.chapters,
+          downloaded: [],
           status: DownloadStatus.ONGOING
         }
       ];
     case LIST_ACTIONS.SET_DOWNLOAD_MANGA_STATUS:
       return state.map(manga => {
-        return manga.id == action.id
+        return manga.info.location == action.id
           ? { ...manga, status: action.status }
+          : manga;
+      });
+    case LIST_ACTIONS.ADD_DOWNLOADED_CHAPTER:
+      return state.map(manga => {
+        return manga.info.location == action.id
+          ? { ...manga, downloaded: [...manga.downloaded, action.chapter] }
           : manga;
       });
     default:

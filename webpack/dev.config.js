@@ -5,6 +5,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = {
   context: path.join(__dirname, "../app"),
   devtool: "inline-source-map",
+  target: "node",
   entry: {
     app: [
       "babel-polyfill",
@@ -25,6 +26,9 @@ module.exports = {
     hot: true,
     publicPath: "http://localhost:8080/",
     historyApiFallback: true
+  },
+  node: {
+    fs: "empty"
   },
   module: {
     rules: [

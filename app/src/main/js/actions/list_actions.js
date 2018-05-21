@@ -1,5 +1,10 @@
 import { LIST_ACTIONS } from '../consts/action_types';
 
+export const updateAllMangaList = (list) => ({
+  type: LIST_ACTIONS.ALL_MANGA_UPDATE_LIST,
+  list
+});
+
 export const selectMangaForDownload = manga => ({
   type: LIST_ACTIONS.MANGA_SELECT_FOR_DOWNLOAD,
   manga
@@ -29,9 +34,10 @@ export const setFilterValue = value => ({
   value
 });
 
-export const downloadManga = (id, chapters) => ({
+export const downloadManga = (info, location, chapters) => ({
   type: LIST_ACTIONS.DOWNLOAD_MANGA,
-  id,
+  info,
+  location,
   chapters
 });
 
@@ -63,6 +69,12 @@ export const setDownloadMangaStatus = (id, status) => ({
   type: LIST_ACTIONS.SET_DOWNLOAD_MANGA_STATUS,
   id,
   status
+});
+
+export const addDownloadedChapter = (id, chapter) => ({
+  type: LIST_ACTIONS.ADD_DOWNLOADED_CHAPTER,
+  id,
+  chapter
 });
 
 export const setIsMangaFetchingStatus = status => ({
