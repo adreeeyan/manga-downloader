@@ -14,10 +14,10 @@ let mainWindow;
 /** This function will create the mainWindow */
 function createWindow() {
   // Create the browser window.
-  if(process.env.NODE_ENV === "development"){
+  if (process.env.NODE_ENV === "development") {
     mainWindow = new BrowserWindow({ width: 1500, height: 700 });
-  }else{
-    mainWindow = new BrowserWindow({ width: 1300, height: 700 });    
+  } else {
+    mainWindow = new BrowserWindow({ width: 1300, height: 700 });
   }
 
   // and load the index.html of the app.
@@ -31,7 +31,7 @@ function createWindow() {
 
   if (process.env.NODE_ENV === "development") {
     // Open the DevTools.
-    mainWindow.webContents.openDevTools();    
+    mainWindow.webContents.openDevTools();
     const {
       default: installExtension,
       REACT_DEVELOPER_TOOLS,
@@ -57,29 +57,29 @@ function createWindow() {
 
 // The real start app
 const startApp = () => {
-  const serverProc = require("child_process").fork(
+  const apiServer = require("child_process").fork(
     require.resolve("./server/server.js"),
     [],
     { silent: true }
   );
-  serverProc.stdout.on("data", (data) => {
+  apiServer.stdout.on("data", data => {
     const serverOutput = data.toString("utf8");
     // check if server started the API already
-    if(serverOutput.indexOf("Manga provider API started") != -1)
-    {
+    if (serverOutput.indexOf("Manga provider API started") != -1) {
+      console.log("creating the window");
       // create the window
       createWindow();
     }
     // output from server
     console.log("server process", serverOutput);
   });
-  serverProc.on("exit", (code, sig) => {
+  apiServer.on("exit", (code, sig) => {
     // finishing
   });
-  serverProc.on("error", error => {
+  apiServer.on("error", error => {
     // error handling
   });
-}
+};
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

@@ -11,6 +11,7 @@ import {
   addDownloadedChapter
 } from "../actions/list_actions";
 import MangaServices from "../services/manga-services";
+import { DownloadStatus } from "../consts/download-status";
 
 const SelectedMangaInfo = ({
   isFetchingManga,
@@ -56,7 +57,8 @@ const mapDispatchToProps = dispatch => ({
 
 const doDownloadManga = (info, location, chapters) => {
   return (dispatch, getState) => {
-    const manga = getState().selectedMangaForDownload;
+    const state = getState();
+    const manga = state.selectedMangaForDownload;
     const mappedChapters = _.map(chapters, chapter => {
       return manga.chapters.find(c => c.index === chapter);
     });
@@ -66,6 +68,26 @@ const doDownloadManga = (info, location, chapters) => {
       location,
       info.title,
       mappedChapters,
+      (id) => {
+        return new Promise(resolve => {
+          // check if manga state is paused
+
+          const checker = () => {
+            const downloadedMangas = getState().downloadedMangas;
+            const manga = _.find(downloadedMangas, m => m.info.location == id);
+            if (manga.status == DownloadStatus.PAUSED) {
+              console.log(`${manga.info.title} is paused`);
+              setTimeout(() => {
+                checker();
+              }, 1000);
+            } else if (manga.status == DownloadStatus.ONGOING) {
+              resolve();
+            }
+          };
+
+          checker();
+        });
+      },
       (id, chapter) => {
         dispatch(addDownloadedChapter(id, chapter));
       }

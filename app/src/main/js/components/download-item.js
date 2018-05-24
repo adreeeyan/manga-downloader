@@ -33,7 +33,7 @@ const DownloadItem = ({ manga, setFilter }) => (
               type="button"
               className="btn btn-sm btn-warning"
               onClick={() => {
-                setFilter(manga.id, DownloadStatus.PAUSED);
+                setFilter(manga.info.location, DownloadStatus.PAUSED);
               }}>
               <span className="fa fa-pause-circle mr-1" />Pause
             </button>
@@ -43,7 +43,7 @@ const DownloadItem = ({ manga, setFilter }) => (
               type="button"
               className="btn btn-sm btn-info"
               onClick={() => {
-                setFilter(manga.id, DownloadStatus.ONGOING);
+                setFilter(manga.info.location, DownloadStatus.ONGOING);
               }}>
               <span className="fa fa-play-circle mr-1" />Resume
             </button>

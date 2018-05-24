@@ -41,7 +41,7 @@ const getSourceFromLocation = async location => {
   return await source.json();
 };
 
-const download = async (id, location, title, chapters, progressCb) => {
+const download = async (id, location, title, chapters, pauseCheck, progressCb) => {
   // create the manga folder
   const baseFolder = `${location}/${title}`;
   mkdirp.sync(baseFolder);
@@ -57,6 +57,7 @@ const download = async (id, location, title, chapters, progressCb) => {
     const pages = await getPages(encryptParam(chapter.location));
     // download each pages
     for (const page of pages) {
+      await pauseCheck(id);
       const pagePrefix = page.index.toString().padStart(4, "0");
       const pageLocation = `${chapterFolder}/${pagePrefix}.jpg`;
       await downloadImage(page.image, pageLocation);
