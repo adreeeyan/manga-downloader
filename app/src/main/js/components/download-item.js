@@ -4,6 +4,8 @@ import classNames from "classnames";
 import "../../res/scss/download-item.scss";
 import { DownloadStatus } from "../consts/download-status";
 
+const { shell } = require("electron").remote.require("electron");
+
 const DownloadItem = ({ manga, setFilter, setForDelete }) => (
   <div className="download-item">
     <div className="row">
@@ -63,6 +65,14 @@ const DownloadItem = ({ manga, setFilter, setForDelete }) => (
               <span className="fa fa-play-circle mr-1" />Resume
             </button>
           )}
+          <button
+            type="button"
+            className="btn btn-sm btn-success ml-1"
+            onClick={() => {
+              shell.showItemInFolder(`${manga.location}/${manga.info.title}`);
+            }}>
+            <span className="fa fa-folder-open mr-1" />Open folder
+          </button>
           <button
             type="button"
             className="btn btn-sm btn-outline-danger ml-1"

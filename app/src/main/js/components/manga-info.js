@@ -50,12 +50,13 @@ class MangaInfo extends Component {
     } = {
       ...this.props
     };
+    let saveLocationControl;
     const selectDirectory = () => {
       const saveLocation = electronDialog.showOpenDialog({
         properties: ["openDirectory"]
-      }) || this.state.saveLocation;
+      }) || [this.state.saveLocation];
       this.setState({
-        saveLocation: saveLocation
+        saveLocation: saveLocation[0]
       });
     };
     return (
@@ -108,7 +109,15 @@ class MangaInfo extends Component {
               </div>
               <div className="row directory-picker">
                 <label className="col-md-auto pr-1">Save location</label>
-                <input type="text" className="col-md-3 mr-1 directory-picker" value={this.state.saveLocation} />
+                <input
+                  ref={node => (saveLocationControl = node)}
+                  type="text"
+                  className="col-md-3 mr-1 directory-picker"
+                  value={this.state.saveLocation}
+                  onChange={() =>
+                    this.setState({ saveLocation: saveLocationControl.value })
+                  }
+                />
                 <button
                   type="button"
                   className="col-md-auto btn btn-outline-primary"
