@@ -1,7 +1,6 @@
-import { addDownloadedChapter } from "../actions/list_actions";
+import { addDownloadedChapter, setDownloadMangaStatus } from "../actions/list_actions";
 import { store } from "../store";
 import { DownloadStatus } from "../consts/download-status";
-
 
 const fs = require("fs");
 const mkdirp = require("mkdirp");
@@ -70,6 +69,7 @@ const download = async (id, location, title, chapters, startingChapter = 0) => {
     // update status
     updateProgress(id, chapter);
   }
+  updateFinished(id);
   return { status: "success" };
 };
 
@@ -112,6 +112,10 @@ const checkIfPaused = id => {
 
 const updateProgress = (id, chapter) => {
   store.dispatch(addDownloadedChapter(id, chapter));
+};
+
+const updateFinished = id => {
+  store.dispatch(setDownloadMangaStatus(id, DownloadStatus.DOWNLOADED));
 };
 
 const encryptParam = param => {

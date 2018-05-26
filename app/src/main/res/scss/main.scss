@@ -50,9 +50,13 @@ button {
   &:hover {
     cursor: pointer;
     background-color: $color2;
-
-    &:disabled {
-      cursor: not-allowed;
+  }
+  &:disabled,
+  &.disabled {
+    cursor: not-allowed;
+    &:focus {
+      outline: none !important;
+      box-shadow: none !important;
     }
   }
 }
