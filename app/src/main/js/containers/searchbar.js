@@ -15,6 +15,7 @@ const SearchBar = ({ value, setFilterValue }) => {
         value={value}
         placeholder="Type the manga title here..."
         onChange={() => setFilterValue(input.value)}
+        autoFocus
       />
     </div>
   );
