@@ -11,8 +11,8 @@ const downloadManga = (state = [], action) => {
           info: action.info,
           location: action.location,
           chapters: action.chapters,
-          downloaded: [],
-          status: DownloadStatus.ONGOING
+          downloaded: action.finishedChapters,
+          status: action.status || DownloadStatus.ONGOING
         }
       ];
     case LIST_ACTIONS.SET_DOWNLOAD_MANGA_STATUS:

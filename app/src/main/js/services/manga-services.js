@@ -1,4 +1,7 @@
 import { addDownloadedChapter } from "../actions/list_actions";
+import { store } from "../store";
+import { DownloadStatus } from "../consts/download-status";
+
 
 const fs = require("fs");
 const mkdirp = require("mkdirp");
@@ -41,13 +44,14 @@ const getSourceFromLocation = async location => {
   return await source.json();
 };
 
-const download = async (id, location, title, chapters, pauseCheck, progressCb) => {
+const download = async (id, location, title, chapters, startingChapter = 0) => {
   // create the manga folder
   const baseFolder = `${location}/${title}`;
   mkdirp.sync(baseFolder);
 
   // iterate the chapters list
-  for (const chapter of chapters) {
+  const slicedChapters = chapters.slice(startingChapter);
+  for (const chapter of slicedChapters) {
     // create the folder for the chapter
     const chapterPrefix = chapter.index.toString().padStart(4, "0");
     const chapterFolder = `${baseFolder}/${chapterPrefix} - ${chapter.title}`;
@@ -57,14 +61,14 @@ const download = async (id, location, title, chapters, pauseCheck, progressCb) =
     const pages = await getPages(encryptParam(chapter.location));
     // download each pages
     for (const page of pages) {
-      await pauseCheck(id);
+      await checkIfPaused(id);
       const pagePrefix = page.index.toString().padStart(4, "0");
       const pageLocation = `${chapterFolder}/${pagePrefix}.jpg`;
       await downloadImage(page.image, pageLocation);
     }
 
     // update status
-    progressCb(id, chapter);
+    updateProgress(id, chapter);
   }
   return { status: "success" };
 };
@@ -84,6 +88,30 @@ const downloadImage = async (url, location) => {
       }
     });
   });
+};
+
+const checkIfPaused = id => {
+  return new Promise(resolve => {
+    // check if manga state is paused
+    const checker = () => {
+      const downloadedMangas = store.getState().downloadedMangas;
+      const manga = _.find(downloadedMangas, m => m.info.location == id);
+      if (manga.status == DownloadStatus.PAUSED) {
+        console.log(`${manga.info.title} is paused`);
+        setTimeout(() => {
+          checker();
+        }, 1000);
+      } else if (manga.status == DownloadStatus.ONGOING) {
+        resolve();
+      }
+    };
+
+    checker();
+  });
+};
+
+const updateProgress = (id, chapter) => {
+  store.dispatch(addDownloadedChapter(id, chapter));
 };
 
 const encryptParam = param => {

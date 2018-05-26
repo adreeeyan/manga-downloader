@@ -1,12 +1,11 @@
+import fs from "fs";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
 import { HashRouter } from "react-router-dom";
 import { AppContainer } from "react-hot-loader";
-import thunk from "redux-thunk";
 
-import reducers from "./reducers/index";
+import { store } from "./store";
 import App from "./app";
 import MangaServices from "./services/manga-services";
 import {
@@ -15,13 +14,8 @@ import {
   setGlobalMessage,
   removeGlobalMessage
 } from "./actions/list_actions";
-
-/*
-Here we are getting the initial state injected by the server. See routes/index.js for more details
- */
-const initialState = window.__INITIAL_STATE__; // eslint-disable-line
-
-const store = createStore(reducers, initialState, applyMiddleware(thunk));
+import { DOWNLOADEDMANGASDBNAME } from "./consts/settings";
+import { doDownloadManga } from "./actions/download";
 
 // get initial mangas
 store.dispatch(setGlobalMessage("Updating manga providers..."));
@@ -29,6 +23,37 @@ MangaServices.searchManga("").then(list => {
   store.dispatch(updateList(list));
   store.dispatch(updateAllMangaList(list));
   store.dispatch(removeGlobalMessage());
+
+  // check if there are outstanding downloads
+  if (fs.existsSync(DOWNLOADEDMANGASDBNAME)) {
+    const downloadedMangas = JSON.parse(
+      fs.readFileSync(DOWNLOADEDMANGASDBNAME, { encoding: "utf8" })
+    );
+    downloadedMangas.forEach(manga => {
+      const chapters = _.map(manga.chapters, m => m.index);
+      doDownloadManga(manga.info, manga.location, chapters, manga.downloaded, manga.status)(
+        store.dispatch,
+        store.getState
+      );
+    });
+  }
+});
+
+// subscribe store to save download status
+let previousState = {};
+store.subscribe(() => {
+  let currentState = store.getState();
+  if (
+    !_.isEqual(previousState.downloadedMangas, currentState.downloadedMangas) &&
+    !_.isUndefined(previousState.downloadedMangas)
+  ) {
+    // write the download status
+    fs.writeFileSync(
+      DOWNLOADEDMANGASDBNAME,
+      JSON.stringify(currentState.downloadedMangas, null, 4)
+    );
+  }
+  previousState = currentState;
 });
 
 /*
@@ -54,9 +79,3 @@ if (module.hot) {
     render(nextApp);
   });
 }
-
-// module.hot.accept('./reducers', () => {
-//   // eslint-disable-next-line
-//   const nextRootReducer = require('./reducers/index');
-//   store.replaceReducer(nextRootReducer);
-// });

@@ -34,11 +34,13 @@ export const setFilterValue = value => ({
   value
 });
 
-export const downloadManga = (info, location, chapters) => ({
+export const downloadManga = (info, location, chapters, finishedChapters, status) => ({
   type: LIST_ACTIONS.DOWNLOAD_MANGA,
   info,
   location,
-  chapters
+  chapters,
+  finishedChapters,
+  status
 });
 
 export const toggleChapter = index => ({

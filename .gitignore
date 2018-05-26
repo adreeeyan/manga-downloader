@@ -3,3 +3,4 @@ app/build
 .vscode
 yarn.lock
 release
+download_state.json

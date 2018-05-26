@@ -1,0 +1,1 @@
+export const DOWNLOADEDMANGASDBNAME = "download_state.json";
