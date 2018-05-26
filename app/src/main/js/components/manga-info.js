@@ -6,8 +6,11 @@ import "../../res/scss/manga-info.scss";
 import ChaptersSelector from "./chapters-selector";
 import LoadingIndicator from "./loading-indicator";
 
+const remote = require("electron").remote;
+const electronDialog = remote.require("electron").dialog;
+
 class MangaInfo extends Component {
-  state = { isClosing: false };
+  state = { isClosing: false, saveLocation: "/mnt/data/stuff/manga" };
 
   close = () => {
     this.setState({ isClosing: true });
@@ -37,8 +40,23 @@ class MangaInfo extends Component {
   }
 
   render() {
-    let { manga, onClickClose, onClickAdd, history, selectedChapters, isFetchingManga } = {
+    let {
+      manga,
+      onClickClose,
+      onClickAdd,
+      history,
+      selectedChapters,
+      isFetchingManga
+    } = {
       ...this.props
+    };
+    const selectDirectory = () => {
+      const saveLocation = electronDialog.showOpenDialog({
+        properties: ["openDirectory"]
+      }) || this.state.saveLocation;
+      this.setState({
+        saveLocation: saveLocation
+      });
     };
     return (
       <div
@@ -88,12 +106,26 @@ class MangaInfo extends Component {
               <div className="mt-4">
                 <ChaptersSelector chapters={manga.chapters} />
               </div>
+              <div className="row directory-picker">
+                <label className="col-md-auto pr-1">Save location</label>
+                <input type="text" className="col-md-3 mr-1 directory-picker" value={this.state.saveLocation} />
+                <button
+                  type="button"
+                  className="col-md-auto btn btn-outline-primary"
+                  onClick={selectDirectory}>
+                  <span>Browse</span>
+                </button>
+              </div>
               <div className="actions float-right">
                 <button
                   type="button"
                   className="btn btn-success"
                   onClick={() => {
-                    onClickAdd(manga, "/mnt/data/stuff/manga", selectedChapters);
+                    onClickAdd(
+                      manga,
+                      this.state.saveLocation,
+                      selectedChapters
+                    );
                     history.push("/downloads");
                   }}
                   disabled={selectedChapters.length == 0}>

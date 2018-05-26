@@ -67,7 +67,7 @@ const ChaptersSelector = ({
         ))}
       </div>
       <div className="range">
-        <div className="form-group row ml-0 mr-0 mt-2">
+        <div className="form-group row ml-0 mr-0 mt-2 mb-1">
           <label className="col-form-label">From</label>
           <div className="mt-1 ml-2 mr-2">
             <input

@@ -13,7 +13,7 @@ module.exports = {
   entry: {
     app: ["babel-polyfill", "./src/main/js/index.js", "./src/main/res/scss/main.scss"]
   },
-  target: "node",
+  target: "electron-renderer",
   mode: "production",
   output: {
     path: path.resolve(__dirname, "../app/build"),

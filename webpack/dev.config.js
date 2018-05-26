@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = {
   context: path.join(__dirname, "../app"),
   devtool: "inline-source-map",
-  target: "node",
+  target: "electron-renderer",
   entry: {
     app: [
       "babel-polyfill",
