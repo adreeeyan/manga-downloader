@@ -89,14 +89,16 @@
     "history": "^4.7.2",
     "lodash": "^4.17.10",
     "mkdirp": "^0.5.1",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
+    "react": "^16.4.0",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "^16.4.0",
     "react-lazy": "^0.5.1",
     "react-redux": "^5.0.7",
     "react-router": "4.2.0",
     "react-router-dom": "4.2.2",
     "react-router-page-transition": "^3.1.0",
     "redux": "^4.0.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "rimraf": "^2.6.2"
   }
 }

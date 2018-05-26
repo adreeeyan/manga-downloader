@@ -82,3 +82,21 @@ span {
   }
   border-bottom: 2px solid gray;
 }
+
+// modal
+.modal-container {
+  position: relative;
+}
+.modal-container .modal,
+.modal-container .modal-backdrop {
+  position: absolute;
+}
+.modal-dialog {
+  margin-top: 100px;
+}
+.modal-backdrop.in {
+  opacity: 0.8;
+  & + div.modal.in {
+    opacity: 1;
+  }
+}

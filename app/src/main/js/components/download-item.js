@@ -4,7 +4,7 @@ import classNames from "classnames";
 import "../../res/scss/download-item.scss";
 import { DownloadStatus } from "../consts/download-status";
 
-const DownloadItem = ({ manga, setFilter }) => (
+const DownloadItem = ({ manga, setFilter, setForDelete }) => (
   <div className="download-item">
     <div className="row">
       <div className="cover">
@@ -63,7 +63,12 @@ const DownloadItem = ({ manga, setFilter }) => (
               <span className="fa fa-play-circle mr-1" />Resume
             </button>
           )}
-          <button type="button" className="btn btn-sm btn-outline-danger ml-1">
+          <button
+            type="button"
+            className="btn btn-sm btn-outline-danger ml-1"
+            onClick={() => {
+              setForDelete(manga);
+            }}>
             <span className="fa fa-trash mr-1" />Delete
           </button>
         </div>

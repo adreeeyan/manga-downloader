@@ -1,13 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
 import DownloadItem from "../components/download-item";
-import { setDownloadMangaStatus } from "../actions/list_actions";
+import {
+  setDownloadMangaStatus,
+  setDownloadedMangaForDeletion
+} from "../actions/list_actions";
 
-const DownloadsList = ({ mangas, setFilter }) => (
+const DownloadsList = ({ mangas, setFilter, setForDelete }) => (
   <div className="row">
     {mangas.map((manga, key) => (
       <div className="col-sm-12 col-lg-6" key={key}>
-        <DownloadItem manga={manga} setFilter={setFilter} />
+        <DownloadItem
+          manga={manga}
+          setFilter={setFilter}
+          setForDelete={setForDelete}
+        />
       </div>
     ))}
   </div>
@@ -28,7 +35,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setFilter: (id, status) => dispatch(setDownloadMangaStatus(id, status))
+  setFilter: (id, status) => dispatch(setDownloadMangaStatus(id, status)),
+  setForDelete: manga => {
+    dispatch(setDownloadedMangaForDeletion(manga))
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DownloadsList);

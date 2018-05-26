@@ -1,10 +1,14 @@
-import { addDownloadedChapter, setDownloadMangaStatus } from "../actions/list_actions";
+import fs from "fs";
+import mkdirp from "mkdirp";
+import http from "http";
+import rimraf from "rimraf";
+
+import {
+  addDownloadedChapter,
+  setDownloadMangaStatus
+} from "../actions/list_actions";
 import { store } from "../store";
 import { DownloadStatus } from "../consts/download-status";
-
-const fs = require("fs");
-const mkdirp = require("mkdirp");
-const http = require("http");
 
 const SERVER_URL = "http://localhost:55235";
 
@@ -91,11 +95,14 @@ const downloadImage = async (url, location) => {
 };
 
 const checkIfPaused = id => {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     // check if manga state is paused
     const checker = () => {
       const downloadedMangas = store.getState().downloadedMangas;
       const manga = _.find(downloadedMangas, m => m.info.location == id);
+      if (!manga) {
+        return;
+      }
       if (manga.status == DownloadStatus.PAUSED) {
         console.log(`${manga.info.title} is paused`);
         setTimeout(() => {
@@ -118,6 +125,12 @@ const updateFinished = id => {
   store.dispatch(setDownloadMangaStatus(id, DownloadStatus.DOWNLOADED));
 };
 
+const deleteDownloadedManga = location => {
+  rimraf(location, () => {
+    console.log(`Deleted ${location}`);
+  });
+};
+
 const encryptParam = param => {
   return btoa(param);
 };
@@ -128,7 +141,8 @@ const MangaService = {
   getChapters,
   updateMangaProviders,
   getSourceFromLocation,
-  download
+  download,
+  deleteDownloadedManga
 };
 
 export default MangaService;

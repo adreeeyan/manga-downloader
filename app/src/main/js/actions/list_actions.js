@@ -1,6 +1,6 @@
-import { LIST_ACTIONS } from '../consts/action_types';
+import { LIST_ACTIONS } from "../consts/action_types";
 
-export const updateAllMangaList = (list) => ({
+export const updateAllMangaList = list => ({
   type: LIST_ACTIONS.ALL_MANGA_UPDATE_LIST,
   list
 });
@@ -24,7 +24,7 @@ export const clearManga = () => ({
   type: LIST_ACTIONS.MANGA_CLEAR
 });
 
-export const updateList = (list) => ({
+export const updateList = list => ({
   type: LIST_ACTIONS.MANGA_UPDATE_LIST,
   list
 });
@@ -34,7 +34,13 @@ export const setFilterValue = value => ({
   value
 });
 
-export const downloadManga = (info, location, chapters, finishedChapters, status) => ({
+export const downloadManga = (
+  info,
+  location,
+  chapters,
+  finishedChapters,
+  status
+) => ({
   type: LIST_ACTIONS.DOWNLOAD_MANGA,
   info,
   location,
@@ -71,6 +77,17 @@ export const setDownloadMangaStatus = (id, status) => ({
   type: LIST_ACTIONS.SET_DOWNLOAD_MANGA_STATUS,
   id,
   status
+});
+
+export const setDownloadedMangaForDeletion = manga => ({
+  type: LIST_ACTIONS.SET_DOWNLOAD_MANGA_FOR_DELETION,
+  manga
+});
+
+export const deleteDownloadedManga = (id, includeFiles) => ({
+  type: LIST_ACTIONS.DELETE_DOWNLOADED_MANGA,
+  id,
+  includeFiles
 });
 
 export const addDownloadedChapter = (id, chapter) => ({
