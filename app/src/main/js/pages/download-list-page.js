@@ -62,6 +62,7 @@ const DownloadListPage = ({
         <Modal.Footer className="pt-1 pb-1">
           <Button
             className="btn-outline-success"
+            autoFocus
             onClick={clearDownloadedMangaForDeletion}>
             No...
           </Button>
