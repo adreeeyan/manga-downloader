@@ -1,7 +1,7 @@
 {
   "name": "baruch-manga-downloader",
-  "version": "0.0.1",
-  "description": "Baruch: Manga downloader",
+  "version": "0.0.2",
+  "description": "An electron based manga downloader.",
   "main": "./app/build/app.js",
   "scripts": {
     "dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --config webpack/dev.config.js\" \"cross-env NODE_ENV=development electron ./app/src/main/app.js\"",
@@ -16,7 +16,7 @@
   "license": "MIT",
   "build": {
     "productName": "Baruch: Manga downloader",
-    "asar": false,
+    "asar": true,
     "files": [
       "app/build"
     ],
