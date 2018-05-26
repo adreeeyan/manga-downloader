@@ -4,3 +4,4 @@ app/build
 yarn.lock
 release
 download_state.json
+mangas.json
