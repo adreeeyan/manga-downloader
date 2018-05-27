@@ -87,9 +87,23 @@ const restoreDownloads = () => {
   }
 };
 
+const injectTheme = theme => {
+  const oldTheme = document.getElementById("theme");
+  if (oldTheme) {
+    oldTheme.href = `./themes/${theme}/bootstrap.min.css`;
+    return;
+  }
+  const link = document.createElement("link");
+  link.id = "theme";
+  link.rel = "stylesheet";
+  link.href = `./themes/${theme}/bootstrap.min.css`;
+  document.head.appendChild(link);
+};
+
 const InitService = {
   restoreSettings,
-  updateAllMangasList
+  updateAllMangasList,
+  injectTheme
 };
 
 export default InitService;

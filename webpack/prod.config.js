@@ -78,6 +78,10 @@ module.exports = {
       {
         from: "./src/main/server",
         to: path.join(__dirname, "../app/build/server")
+      },
+      {
+        from: "./src/main/themes",
+        to: path.join(__dirname, "../app/build/themes")
       }
     ])
   ]

@@ -1,3 +1,5 @@
+import InitService from "../services/init-services";
+
 import { SETTINGS_ACTIONS } from "../consts/settings_action_types";
 
 export const setSettings = settings => ({
@@ -56,6 +58,8 @@ export const doSetDarkTheme = () => {
   return (dispatch, getState) => {
     const status = getState().settings.isDarkThemeEnabled;
     dispatch(setDarkTheme(!status));
+    const theme = !status ? "superhero" : "pulse";
+    InitService.injectTheme(theme);
   };
 };
 

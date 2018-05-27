@@ -91,6 +91,7 @@
     "mkdirp": "^0.5.1",
     "react": "^16.4.0",
     "react-bootstrap": "^0.32.1",
+    "react-bootstrap-theme-switcher": "^1.0.7",
     "react-dom": "^16.4.0",
     "react-lazy": "^0.5.1",
     "react-redux": "^5.0.7",

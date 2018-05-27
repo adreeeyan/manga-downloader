@@ -62,7 +62,7 @@ button {
 }
 
 .btn-radius {
-  border-radius: 20px;
+  border-radius: 20px !important;
 }
 
 div,
@@ -89,18 +89,18 @@ span {
 
 // modal
 .modal-container {
-  position: relative;
+  position: relative !important;
 }
 .modal-container .modal,
 .modal-container .modal-backdrop {
-  position: absolute;
+  position: absolute !important;
 }
 .modal-dialog {
-  margin-top: 100px;
+  margin-top: 100px !important;
 }
 .modal-backdrop.in {
-  opacity: 0.8;
+  opacity: 0.8 !important;
   & + div.modal.in {
-    opacity: 1;
+    opacity: 1 !important;
   }
 }
