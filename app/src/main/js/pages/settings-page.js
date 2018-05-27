@@ -67,8 +67,8 @@ const SettingsPage = ({
         <h4 className="title">Saving</h4>
         <hr />
         <div className="items mt-2 row">
-          <div className="col-sm">Default save location</div>
-          <div className="col-sm-12 row mt-2 ml-5">
+          <div className="col-sm-5">Default save location</div>
+          <div className="col-sm-11 row mt-2 ml-5">
             <input
               type="text"
               className="col-sm-3 form-control form-control-sm"
@@ -84,8 +84,8 @@ const SettingsPage = ({
           </div>
         </div>
         <div className="items mt-2 row">
-          <div className="col-sm">Default format</div>
-          <div className="col-sm-12 row mt-2 ml-5">
+          <div className="col-sm-5">Default format</div>
+          <div className="col-sm-11 row mt-2 ml-5">
             <select
               className="form-control form-control-sm col-sm-3"
               value={settings.saveFormat}

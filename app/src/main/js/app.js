@@ -6,7 +6,6 @@ import { ThemeSwitcher } from "react-bootstrap-theme-switcher";
 import classNames from "classnames";
 
 import NavBar from "./components/navbar";
-import EmptyListPlaceholder from "./components/emptylist-placeholder";
 import DownloadListPage from "./pages/download-list-page";
 import SearchMangaPage from "./pages/search-manga-page";
 import SettingsPage from "./pages/settings-page";
@@ -27,9 +26,8 @@ const App = ({ globalMessage = "", theme }) => (
             render={({ location }) => (
               <PageTransition timeout={0}>
                 <Switch location={location}>
-                  <Route exact path="/" component={EmptyListPlaceholder} />
+                  <Route exact path="/" component={DownloadListPage}/>
                   <Route path="/search" component={SearchMangaPage} />
-                  <Route path="/downloads" component={DownloadListPage} />
                   <Route path="/settings" component={SettingsPage} />
                 </Switch>
               </PageTransition>

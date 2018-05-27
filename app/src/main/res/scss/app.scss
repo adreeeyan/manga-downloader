@@ -20,6 +20,9 @@
     line-height: 1.5;
     border-radius: 2px;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover,
     &.active {
