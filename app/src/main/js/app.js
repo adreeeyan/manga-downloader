@@ -9,6 +9,7 @@ import NavBar from "./components/navbar";
 import DownloadListPage from "./pages/download-list-page";
 import SearchMangaPage from "./pages/search-manga-page";
 import SettingsPage from "./pages/settings-page";
+import AboutPage from "./pages/about-page";
 
 import GlobalLoadingIndicator from "./components/global-loading-indicator";
 import "../res/scss/app.scss";
@@ -29,6 +30,7 @@ const App = ({ globalMessage = "", theme }) => (
                   <Route exact path="/" component={DownloadListPage}/>
                   <Route path="/search" component={SearchMangaPage} />
                   <Route path="/settings" component={SettingsPage} />
+                  <Route path="/about" component={AboutPage} />
                 </Switch>
               </PageTransition>
             )}
