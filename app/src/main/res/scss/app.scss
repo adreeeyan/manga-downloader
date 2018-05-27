@@ -39,6 +39,11 @@
 .content {
   overflow-y: auto;
   overflow-x: hidden;
+  background: url(../images/bg1.png) no-repeat right 100px;
+
+  &.dark {
+    background: url(../images/bg2.png) no-repeat right 100px;
+  }
 }
 
 // page transitions

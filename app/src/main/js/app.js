@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Route, HashRouter, Switch } from "react-router-dom";
 import PageTransition from "react-router-page-transition";
 import { ThemeSwitcher } from "react-bootstrap-theme-switcher";
+import classNames from "classnames";
 
 import NavBar from "./components/navbar";
 import EmptyListPlaceholder from "./components/emptylist-placeholder";
@@ -18,7 +19,10 @@ const App = ({ globalMessage = "", theme }) => (
     <HashRouter>
       <div className="app">
         <NavBar />
-        <div className="container-fluid content">
+        <div
+          className={classNames("container-fluid", "content", {
+            dark: theme == "superhero"
+          })}>
           <Route
             render={({ location }) => (
               <PageTransition timeout={0}>
