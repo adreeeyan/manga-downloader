@@ -7,5 +7,5 @@ export default {
     saveLocation: "/mnt/data/stuff/manga",
     saveFormat: "folder",
     isNotifyOnFinishEnabled: true,
-    isDarkThemeEnabled: true,
+    isDarkThemeEnabled: false,
 };
