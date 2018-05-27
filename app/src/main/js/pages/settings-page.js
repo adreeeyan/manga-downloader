@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
+
 import SwitchToggle from "../components/switch-toggle";
+import InitService from "../services/init-services";
 
 import "../../res/scss/settings-page.scss";
 import {
@@ -35,6 +37,9 @@ const SettingsPage = ({
     }) || [settings.saveLocation];
     setDefaultSaveLocation(saveLocation[0]);
   };
+  const updateMangaList = () => {
+    InitService.updateAllMangasList(true, true);
+  };
   return (
     <div className="settings-page transition-item page">
       <div className="list mt-4">
@@ -52,7 +57,7 @@ const SettingsPage = ({
         <div className="items mt-0 row">
           <div className="col-sm">Update manga list now</div>
           <div>
-            <button type="button" className="btn btn-primary btn-radius">
+            <button type="button" className="btn btn-primary btn-radius" onClick={updateMangaList}>
               Update
             </button>
           </div>

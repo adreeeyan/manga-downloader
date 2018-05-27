@@ -10,7 +10,7 @@ const remote = require("electron").remote;
 const electronDialog = remote.require("electron").dialog;
 
 class MangaInfo extends Component {
-  state = { isClosing: false, saveLocation: "/mnt/data/stuff/manga" };
+  state = { isClosing: false, saveLocation: this.props.defaultSaveLocation };
 
   close = () => {
     this.setState({ isClosing: true });

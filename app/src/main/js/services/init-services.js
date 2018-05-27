@@ -1,9 +1,15 @@
 import fs from "fs";
+import * as _ from "lodash";
 
 import { store } from "../store";
-import { ALLMANGASDBNAME, DOWNLOADEDMANGASDBNAME } from "../consts/settings";
+import {
+  ALLMANGASDBNAME,
+  DOWNLOADEDMANGASDBNAME,
+  SETTINGSDBNAME
+} from "../consts/settings";
 import MangaServices from "./manga-services";
 import { doDownloadManga } from "../actions/download";
+import { doSetSettings } from "../actions/settings";
 import {
   updateList,
   updateAllMangaList,
@@ -11,22 +17,47 @@ import {
   removeGlobalMessage
 } from "../actions/list_actions";
 
+// restore settings
+const restoreSettings = () => {
+  // check if there are outstanding downloads
+  if (fs.existsSync(SETTINGSDBNAME)) {
+    const settings = JSON.parse(
+      fs.readFileSync(SETTINGSDBNAME, { encoding: "utf8" })
+    );
+    doSetSettings(settings)(store.dispatch, store.getState);
+  }
+};
+
 // update all mangas list
-const updateAllMangasList = (force) => {
+const updateAllMangasList = (force, dontRestoreDownloads) => {
+  // check settings if update on start is enabled
+  const isUpdateOnStartEnabled = store.getState().settings
+    .isUpdateOnStartEnabled;
+
+  if (isUpdateOnStartEnabled) {
+    force = true;
+  }
+
   if (fs.existsSync(ALLMANGASDBNAME) && !force) {
     const allMangas = JSON.parse(
       fs.readFileSync(ALLMANGASDBNAME, { encoding: "utf8" })
     );
     // if no content then we forcely update it
-    if(allMangas.length == 0){
-        updateAllMangasList(true);
-        return;
+    if (allMangas.length == 0) {
+      updateAllMangasList(true);
+      return;
     }
     callDispatchesAfterUpdate(allMangas);
+    if (!dontRestoreDownloads) {
+      restoreDownloads();
+    }
   } else {
-    store.dispatch(setGlobalMessage("Updating manga providers..."));      
+    store.dispatch(setGlobalMessage("Updating manga providers..."));
     MangaServices.searchManga("").then(list => {
       callDispatchesAfterUpdate(list);
+      if (!dontRestoreDownloads) {
+        restoreDownloads();
+      }
     });
   }
 };
@@ -35,7 +66,6 @@ const callDispatchesAfterUpdate = list => {
   store.dispatch(updateList(list));
   store.dispatch(updateAllMangaList(list));
   store.dispatch(removeGlobalMessage());
-  restoreDownloads();
 };
 
 const restoreDownloads = () => {
@@ -58,7 +88,8 @@ const restoreDownloads = () => {
 };
 
 const InitService = {
-    updateAllMangasList
+  restoreSettings,
+  updateAllMangasList
 };
 
 export default InitService;

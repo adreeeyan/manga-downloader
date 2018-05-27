@@ -32,6 +32,12 @@ export const setDarkTheme = isEnabled => ({
 
 // thunks
 
+export const doSetSettings = settings => {
+  return (dispatch, getState) => {
+    dispatch(setSettings(settings));
+  };
+};
+
 export const doSetUpdateOnStart = () => {
   return (dispatch, getState) => {
     const status = getState().settings.isUpdateOnStartEnabled;

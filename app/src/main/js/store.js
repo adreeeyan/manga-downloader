@@ -3,7 +3,13 @@ import thunk from "redux-thunk";
 import fs from "fs";
 
 import reducers from "./reducers/index";
-import { ALLMANGASDBNAME, DOWNLOADEDMANGASDBNAME } from "./consts/settings";
+import {
+  ALLMANGASDBNAME,
+  DOWNLOADEDMANGASDBNAME,
+  SETTINGSDBNAME
+} from "./consts/settings";
+import InitService from "./services/init-services";
+
 /*
 Here we are getting the initial state injected by the server. See routes/index.js for more details
  */
@@ -14,6 +20,11 @@ export const store = createStore(
   initialState,
   applyMiddleware(thunk)
 );
+
+// init-services
+// services should be initialized before the store can call subscriptions
+InitService.restoreSettings();
+InitService.updateAllMangasList();
 
 // subscribe store changes
 let previousState = {};
@@ -38,6 +49,15 @@ store.subscribe(() => {
     fs.writeFileSync(
       ALLMANGASDBNAME,
       JSON.stringify(currentState.allMangas, null, 4)
+    );
+  }
+
+  // for saving the settings
+  if (!_.isEqual(previousState.settings, currentState.settings)) {
+    // write the settings
+    fs.writeFileSync(
+      SETTINGSDBNAME,
+      JSON.stringify(currentState.settings, null, 4)
     );
   }
 
