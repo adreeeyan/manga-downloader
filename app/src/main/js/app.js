@@ -7,6 +7,7 @@ import NavBar from "./components/navbar";
 import EmptyListPlaceholder from "./components/emptylist-placeholder";
 import DownloadListPage from "./pages/download-list-page";
 import SearchMangaPage from "./pages/search-manga-page";
+import SettingsPage from "./pages/settings-page";
 
 import GlobalLoadingIndicator from "./components/global-loading-indicator";
 import "../res/scss/app.scss";
@@ -23,6 +24,7 @@ const App = ({ globalMessage = "" }) => (
                 <Route exact path="/" component={EmptyListPlaceholder} />
                 <Route path="/search" component={SearchMangaPage} />
                 <Route path="/downloads" component={DownloadListPage} />
+                <Route path="/settings" component={SettingsPage} />
               </Switch>
             </PageTransition>
           )}
