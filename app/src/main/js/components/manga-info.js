@@ -135,7 +135,7 @@ class MangaInfo extends Component {
                       this.state.saveLocation,
                       selectedChapters
                     );
-                    history.push("/downloads");
+                    history.push("/");
                   }}
                   disabled={selectedChapters.length == 0}>
                   <span className="fa fa-plus-circle mr-1" />Add to queue
