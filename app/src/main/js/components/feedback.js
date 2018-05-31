@@ -14,7 +14,7 @@ const Feedback = ({ feedback, setFeedback, mailTo, closeFeedback }) => (
         onChange={evt => setFeedback(evt.target.value)}
       />
     </div>
-    <a href={mailTo} onClick={closeFeedback} className="btn btn-outline-primary w-50 mt-4">
+    <a href={mailTo} onClick={closeFeedback} className="btn btn-outline-warning w-50 mt-4">
       Send
     </a>
     <small className="mt-2"><strong>NOTE:</strong> This will open your default email app, just hit send in there directly.</small>
