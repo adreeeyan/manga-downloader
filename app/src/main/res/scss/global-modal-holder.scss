@@ -1,13 +1,30 @@
 @import "~bootswatch/dist/superhero/variables";
 
 .global-modal-holder {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    left: 0;
-    display: flex;
-    justify-items: center;
-    align-items: center;
-    background-color: rgba($gray-900, 0.95);
-    z-index: 100000;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  background-color: rgba($gray-900, 0.95);
+  z-index: 100000;
+  -webkit-animation-duration: 0.3s !important;
+
+  .close {
+    position: fixed;
+    color: $gray-100;
+    right: 20px;
+    top: 10px;
+
+    &:before {
+      font-size: 30px;
+    }
+
+    &:hover {
+      color: $white;
+    }
+  }
 }

@@ -6,6 +6,7 @@ import { downloadedMangas, downloadedMangaForDeletion } from "./download-manga";
 import selectedChapters from "./chapters";
 import { globalMessage } from "./global-message";
 import { settings } from "./settings";
+import { feedback } from "./feedback";
 
 const rootReducer = combineReducers({
   allMangas,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   downloadMangaStatusFilter,
   isFetchingManga,
   globalMessage,
-  settings
+  settings,
+  feedback
 });
 
 export default rootReducer;
