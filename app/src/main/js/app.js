@@ -11,7 +11,8 @@ import SearchMangaPage from "./pages/search-manga-page";
 import SettingsPage from "./pages/settings-page";
 import AboutPage from "./pages/about-page";
 
-import GlobalLoadingIndicator from "./components/global-loading-indicator";
+import GlobalModalHolder from "./components/global-modal-holder";
+import LoadingIndicator from "./components/loading-indicator";
 import "../res/scss/app.scss";
 
 const App = ({ globalMessage = "", theme }) => (
@@ -27,7 +28,7 @@ const App = ({ globalMessage = "", theme }) => (
             render={({ location }) => (
               <PageTransition timeout={0}>
                 <Switch location={location}>
-                  <Route exact path="/" component={DownloadListPage}/>
+                  <Route exact path="/" component={DownloadListPage} />
                   <Route path="/search" component={SearchMangaPage} />
                   <Route path="/settings" component={SettingsPage} />
                   <Route path="/about" component={AboutPage} />
@@ -37,7 +38,9 @@ const App = ({ globalMessage = "", theme }) => (
           />
         </div>
         {globalMessage && (
-          <GlobalLoadingIndicator description={globalMessage} />
+          <GlobalModalHolder>
+            <LoadingIndicator description={globalMessage} />
+          </GlobalModalHolder>
         )}
       </div>
     </HashRouter>
