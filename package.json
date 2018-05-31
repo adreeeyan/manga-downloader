@@ -58,7 +58,7 @@
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
     "electron": "^1.8.6",
-    "electron-builder": "^20.10.0",
+    "electron-builder": "20.14.7",
     "electron-devtools-installer": "^2.2.3",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
