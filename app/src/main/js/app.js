@@ -38,7 +38,7 @@ const App = ({ globalMessage = "", theme }) => (
           />
         </div>
         {globalMessage && (
-          <GlobalModalHolder>
+          <GlobalModalHolder isUncloseable={true}>
             <LoadingIndicator description={globalMessage} />
           </GlobalModalHolder>
         )}
