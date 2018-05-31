@@ -10,6 +10,10 @@ import {
 import { store } from "../store";
 import { DownloadStatus } from "../consts/download-status";
 
+import logo from "../../res/images/logo.png";
+
+const { shell } = require("electron").remote.require("electron");
+
 const SERVER_URL = "http://localhost:55235";
 
 const searchManga = async title => {
@@ -74,6 +78,7 @@ const download = async (id, location, title, chapters, startingChapter = 0) => {
     updateProgress(id, chapter);
   }
   updateFinished(id);
+  await notifyUserFinished(id, location);
   return { status: "success" };
 };
 
@@ -123,6 +128,17 @@ const updateProgress = (id, chapter) => {
 
 const updateFinished = id => {
   store.dispatch(setDownloadMangaStatus(id, DownloadStatus.DOWNLOADED));
+};
+
+const notifyUserFinished = async (id, location) => {
+  const manga = await getManga(id);
+  const notification = new Notification("Manga download complete", {
+    body: manga.title,
+    icon: manga.cover
+  });
+  notification.onclick = (evt) => {
+    shell.showItemInFolder(`${location}/${manga.title}`);
+  };
 };
 
 const deleteDownloadedManga = location => {

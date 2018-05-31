@@ -1,4 +1,8 @@
-import { downloadManga, deleteDownloadedManga, setDownloadedMangaForDeletion } from "../actions/list_actions";
+import {
+  downloadManga,
+  deleteDownloadedManga,
+  setDownloadedMangaForDeletion
+} from "../actions/list_actions";
 import MangaServices from "../services/manga-services";
 import { DownloadStatus } from "../consts/download-status";
 
@@ -19,13 +23,16 @@ export const doDownloadManga = (
     dispatch(
       downloadManga(info, location, mappedChapters, finishedChapters, status)
     );
-    MangaServices.download(
-      info.location,
-      location,
-      info.title,
-      mappedChapters,
-      startingChapter
-    );
+
+    if (status != DownloadStatus.DOWNLOADED) {
+      MangaServices.download(
+        info.location,
+        location,
+        info.title,
+        mappedChapters,
+        startingChapter
+      );
+    }
   };
 };
 
@@ -33,7 +40,7 @@ export const doDeleteDownloadedManga = (id, location, includeFiles) => {
   return (dispatch, getState) => {
     dispatch(deleteDownloadedManga(id, includeFiles));
     dispatch(setDownloadedMangaForDeletion(null));
-    if(includeFiles){
+    if (includeFiles) {
       MangaServices.deleteDownloadedManga(location);
     }
   };
