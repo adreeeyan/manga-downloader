@@ -4,18 +4,16 @@ import { connect } from "react-redux";
 import "../../res/scss/about-page.scss";
 import logo from "../../res/images/logo.png";
 
+const appVersion = require("electron").remote.app.getVersion();
+
 const AboutPage = () => (
   <div className="about-page transition-item page">
     <div className="logo">
-      <img
-        src={logo}
-        alt="logo"
-        className="animated bounce infinite"
-      />
+      <img src={logo} alt="logo" className="animated bounce infinite" />
     </div>
     <div className="title">
       <h4>Baruch: Manga Downloader</h4>
-      <h6>Version 0.0.2</h6>
+      <h6>Version {appVersion}</h6>
     </div>
     <div className="contents">
       <p className="text-center">
