@@ -22,7 +22,7 @@ const DownloadListPage = ({
     <div className="download-list-page transition-item page">
       {downloadedMangas.length == 0 && <EmptyListPlaceholder />}
       {downloadedMangas.length != 0 && (
-        <div>
+        <div className="p-4">
           <div className="filter-state mb-4">
             <DownloadStatesFilter />
           </div>
