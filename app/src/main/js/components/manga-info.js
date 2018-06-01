@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import classNames from "classnames";
 import { withRouter } from "react-router-dom";
+import Collapsible from "react-collapsible";
 
 import "../../res/scss/manga-info.scss";
 import ChaptersSelector from "./chapters-selector";
@@ -98,33 +99,35 @@ class MangaInfo extends Component {
                   </span>
                 </div>
               </div>
-              <div className="summary text-center">
+              <div className="summary text-center mb-4">
                 <h6>
                   <strong>Summary</strong>
                 </h6>
                 <em>{manga.summary}</em>
               </div>
-              <div className="mt-4">
-                <ChaptersSelector chapters={manga.chapters} />
-              </div>
-              <div className="row directory-picker">
-                <label className="col-md-auto pr-1">Save location</label>
-                <input
-                  ref={node => (saveLocationControl = node)}
-                  type="text"
-                  className="col-md-3 mr-1 directory-picker"
-                  value={this.state.saveLocation}
-                  onChange={() =>
-                    this.setState({ saveLocation: saveLocationControl.value })
-                  }
-                />
-                <button
-                  type="button"
-                  className="col-md-auto btn btn-outline-primary"
-                  onClick={selectDirectory}>
-                  <span>Browse</span>
-                </button>
-              </div>
+              <Collapsible trigger="Click me for more configurations" triggerWhenOpen="Hide this messy configurations">
+                <div>
+                  <ChaptersSelector chapters={manga.chapters} />
+                </div>
+                <div className="row directory-picker">
+                  <label className="col-md-auto pr-1">Save location</label>
+                  <input
+                    ref={node => (saveLocationControl = node)}
+                    type="text"
+                    className="col-md-3 mr-1 directory-picker"
+                    value={this.state.saveLocation}
+                    onChange={() =>
+                      this.setState({ saveLocation: saveLocationControl.value })
+                    }
+                  />
+                  <button
+                    type="button"
+                    className="col-md-auto btn btn-outline-warning"
+                    onClick={selectDirectory}>
+                    <span>Browse</span>
+                  </button>
+                </div>
+              </Collapsible>
               <div className="actions float-right">
                 <button
                   type="button"
@@ -138,7 +141,7 @@ class MangaInfo extends Component {
                     history.push("/");
                   }}
                   disabled={selectedChapters.length == 0}>
-                  <span className="fa fa-plus-circle mr-1" />Add to queue
+                  <span className="fa fa-plus-circle mr-1" />Download
                 </button>
                 <button type="button" className="btn btn-outline-warning">
                   <span className="fa fa-bookmark mr-1" />Bookmark
