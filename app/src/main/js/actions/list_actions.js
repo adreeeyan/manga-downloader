@@ -37,6 +37,7 @@ export const setFilterValue = value => ({
 export const downloadManga = (
   info,
   location,
+  compressToCbz,
   chapters,
   finishedChapters,
   status
@@ -44,6 +45,7 @@ export const downloadManga = (
   type: LIST_ACTIONS.DOWNLOAD_MANGA,
   info,
   location,
+  compressToCbz,
   chapters,
   finishedChapters,
   status

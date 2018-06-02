@@ -15,6 +15,9 @@ import GlobalModalHolder from "./components/global-modal-holder";
 import LoadingIndicator from "./components/loading-indicator";
 import "../res/scss/app.scss";
 
+import "jquery/dist/jquery.min.js";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
 const App = ({ globalMessage = "", theme }) => (
   <ThemeSwitcher themePath="./themes" defaultTheme={theme}>
     <HashRouter>

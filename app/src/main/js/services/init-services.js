@@ -79,6 +79,7 @@ const restoreDownloads = () => {
       doDownloadManga(
         manga.info,
         manga.location,
+        manga.compressToCbz,
         chapters,
         manga.downloaded,
         manga.status

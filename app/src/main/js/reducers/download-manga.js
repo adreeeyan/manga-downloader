@@ -10,6 +10,7 @@ export const downloadedMangas = (state = [], action) => {
         {
           info: action.info,
           location: action.location,
+          compressToCbz: action.compressToCbz,          
           chapters: action.chapters,
           downloaded: action.finishedChapters,
           status: action.status || DownloadStatus.ONGOING

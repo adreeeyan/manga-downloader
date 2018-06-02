@@ -9,6 +9,7 @@ import {
 } from "../actions/list_actions";
 import { store } from "../store";
 import { DownloadStatus } from "../consts/download-status";
+import CompressionService from "./compression-services";
 
 import logo from "../../res/images/logo.png";
 
@@ -51,7 +52,14 @@ const getSourceFromLocation = async location => {
   return await source.json();
 };
 
-const download = async (id, location, title, chapters, startingChapter = 0) => {
+const download = async (
+  id,
+  location,
+  compressToCbz,
+  title,
+  chapters,
+  startingChapter = 0
+) => {
   // create the manga folder
   const baseFolder = `${location}/${title}`;
   mkdirp.sync(baseFolder);
@@ -72,6 +80,11 @@ const download = async (id, location, title, chapters, startingChapter = 0) => {
       const pagePrefix = page.index.toString().padStart(4, "0");
       const pageLocation = `${chapterFolder}/${pagePrefix}.jpg`;
       await downloadImage(page.image, pageLocation);
+    }
+
+    // compress folder
+    if (compressToCbz) {
+      await CompressionService.compressChapter(chapterFolder, true);
     }
 
     // update status
@@ -136,7 +149,7 @@ const notifyUserFinished = async (id, location) => {
     body: manga.title,
     icon: manga.cover
   });
-  notification.onclick = (evt) => {
+  notification.onclick = evt => {
     shell.showItemInFolder(`${location}/${manga.title}`);
   };
 };

@@ -17,7 +17,8 @@ const SelectedMangaInfo = ({
   onClickClose,
   onClickAdd,
   selectedChapters,
-  defaultSaveLocation
+  defaultSaveLocation,
+  defaultCompressToCbz
 }) => {
   return (
     <div>
@@ -32,6 +33,7 @@ const SelectedMangaInfo = ({
         selectedChapters={selectedChapters}
         isFetchingManga={isFetchingManga}
         defaultSaveLocation={defaultSaveLocation}
+        defaultCompressToCbz={defaultCompressToCbz}
       />
     </div>
   );
@@ -41,7 +43,8 @@ const mapStateToProps = state => ({
   isFetchingManga: state.isFetchingManga,
   manga: state.selectedMangaForDownload,
   selectedChapters: state.selectedChapters,
-  defaultSaveLocation: state.settings.saveLocation
+  defaultSaveLocation: state.settings.saveLocation,
+  defaultCompressToCbz: state.settings.compressToCbz
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -49,8 +52,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(setIsMangaFetchingStatus(false));
     dispatch(selectMangaForDownload(null));
   },
-  onClickAdd: (manga, location, chapters) => {
-    dispatch(doDownloadManga(manga, location, chapters));
+  onClickAdd: (manga, location, compressToCbz, chapters) => {
+    dispatch(doDownloadManga(manga, location, compressToCbz, chapters));
     dispatch(selectMangaForDownload(null));
     dispatch(selectChapters(null));
   }

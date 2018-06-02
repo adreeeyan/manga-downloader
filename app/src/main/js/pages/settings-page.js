@@ -9,7 +9,7 @@ import {
   doSetUpdateOnStart,
   doSetNotifyOnFinish,
   doSetDarkTheme,
-  doSetDefaultFormat,
+  doSetCompressToCbz,
   doSetDefaultSaveLocation
 } from "../actions/settings";
 
@@ -21,15 +21,13 @@ const SettingsPage = ({
   toggleUpdateOnStart,
   toggleSetNotifyOnFinish,
   toggleSetDarkTheme,
-  setDefaultFormat,
+  toggleSetCompressToCbz,
   setDefaultSaveLocation
 }) => {
-  const onChangeFormat = event => {
-    setDefaultFormat(event.target.value);
-  };
   const onChangeSaveLocation = event => {
     setDefaultSaveLocation(event.target.value);
   };
+  let compressToCbzControl;
   let saveLocationControl;
   const selectDirectory = () => {
     const saveLocation = electronDialog.showOpenDialog({
@@ -57,7 +55,10 @@ const SettingsPage = ({
         <div className="items mt-0 row">
           <div className="col-sm">Update manga list now</div>
           <div>
-            <button type="button" className="btn btn-primary btn-radius" onClick={updateMangaList}>
+            <button
+              type="button"
+              className="btn btn-primary btn-radius"
+              onClick={updateMangaList}>
               Update
             </button>
           </div>
@@ -84,16 +85,12 @@ const SettingsPage = ({
           </div>
         </div>
         <div className="items mt-2 row">
-          <div className="col-sm-5">Default format</div>
-          <div className="col-sm-11 row mt-2 ml-5">
-            <select
-              className="form-control form-control-sm col-sm-3"
-              value={settings.saveFormat}
-              onChange={onChangeFormat}>
-              <option value="folder">Folder</option>
-              <option value="zip">zip</option>
-              <option value="cbx">cbx</option>
-            </select>
+          <div className="col-sm">Compress chapters to CBZ</div>
+          <div>
+            <SwitchToggle
+              onClick={toggleSetCompressToCbz}
+              checked={settings.compressToCbz}
+            />
           </div>
         </div>
       </div>
@@ -137,7 +134,7 @@ const mapDispatchToProps = dispatch => ({
   toggleUpdateOnStart: () => dispatch(doSetUpdateOnStart()),
   toggleSetNotifyOnFinish: () => dispatch(doSetNotifyOnFinish()),
   toggleSetDarkTheme: () => dispatch(doSetDarkTheme()),
-  setDefaultFormat: format => dispatch(doSetDefaultFormat(format)),
+  toggleSetCompressToCbz: compressToCbz => dispatch(doSetCompressToCbz(compressToCbz)),
   setDefaultSaveLocation: location =>
     dispatch(doSetDefaultSaveLocation(location))
 });

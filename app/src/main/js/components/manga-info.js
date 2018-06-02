@@ -11,7 +11,7 @@ const remote = require("electron").remote;
 const electronDialog = remote.require("electron").dialog;
 
 class MangaInfo extends Component {
-  state = { isClosing: false, saveLocation: this.props.defaultSaveLocation };
+  state = { isClosing: false, saveLocation: this.props.defaultSaveLocation, compressToCbz: this.props.defaultCompressToCbz };
 
   close = () => {
     this.setState({ isClosing: true });
@@ -51,7 +51,11 @@ class MangaInfo extends Component {
     } = {
       ...this.props
     };
+    let compressToCbzControl;
     let saveLocationControl;
+    const setCompressToCbz = (evt) => {
+      this.setState({compressToCbz: evt.target.checked})
+    };
     const selectDirectory = () => {
       const saveLocation = electronDialog.showOpenDialog({
         properties: ["openDirectory"]
@@ -105,7 +109,9 @@ class MangaInfo extends Component {
                 </h6>
                 <em>{manga.summary}</em>
               </div>
-              <Collapsible trigger="Click me for more configurations" triggerWhenOpen="Hide this messy configurations">
+              <Collapsible
+                trigger="Click me for more configurations"
+                triggerWhenOpen="Hide this messy configurations">
                 <div>
                   <ChaptersSelector chapters={manga.chapters} />
                 </div>
@@ -127,6 +133,23 @@ class MangaInfo extends Component {
                     <span>Browse</span>
                   </button>
                 </div>
+                <div className="form-group">
+                  <div className="custom-control custom-checkbox">
+                    <input
+                      ref={node => (compressToCbzControl = node)}
+                      type="checkbox"
+                      className="custom-control-input"
+                      id="compressToCbz"
+                      checked={this.state.compressToCbz}
+                      onChange={setCompressToCbz}
+                    />
+                    <label
+                      className="custom-control-label"
+                      htmlFor="compressToCbz">
+                      Compress chapters to CBZ
+                    </label>
+                  </div>
+                </div>
               </Collapsible>
               <div className="actions float-right">
                 <button
@@ -136,6 +159,7 @@ class MangaInfo extends Component {
                     onClickAdd(
                       manga,
                       this.state.saveLocation,
+                      this.state.compressToCbz,
                       selectedChapters
                     );
                     history.push("/");

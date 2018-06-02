@@ -10,8 +10,8 @@ export const settings = (state = DEFAULT_STATE.settings, action) => {
       return { ...state, isUpdateOnStartEnabled: action.isEnabled };
     case SETTINGS_ACTIONS.SET_DEFAULT_SAVE_LOCATION:
       return { ...state, saveLocation: action.location };
-    case SETTINGS_ACTIONS.SET_DEFAULT_FORMAT:
-      return { ...state, saveFormat: action.format };
+    case SETTINGS_ACTIONS.SET_COMPRESS_TO_CBZ:
+      return { ...state, compressToCbz: action.compressToCbz };
     case SETTINGS_ACTIONS.SET_NOTIFY_ON_FINISH:
       return { ...state, isNotifyOnFinishEnabled: action.isEnabled };
     case SETTINGS_ACTIONS.SET_DARK_THEME:

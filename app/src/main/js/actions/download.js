@@ -9,6 +9,7 @@ import { DownloadStatus } from "../consts/download-status";
 export const doDownloadManga = (
   info,
   location,
+  compressToCbz,
   chapters,
   finishedChapters = [],
   status = DownloadStatus.ONGOING
@@ -21,13 +22,14 @@ export const doDownloadManga = (
     const startingChapter = finishedChapters.length;
 
     dispatch(
-      downloadManga(info, location, mappedChapters, finishedChapters, status)
+      downloadManga(info, location, compressToCbz, mappedChapters, finishedChapters, status)
     );
 
     if (status != DownloadStatus.DOWNLOADED) {
       MangaServices.download(
         info.location,
         location,
+        compressToCbz,
         info.title,
         mappedChapters,
         startingChapter

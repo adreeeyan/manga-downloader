@@ -17,9 +17,9 @@ export const setDefaultSaveLocation = location => ({
   location
 });
 
-export const setDefaultFormat = format => ({
-  type: SETTINGS_ACTIONS.SET_DEFAULT_FORMAT,
-  format
+export const setCompressToCbz = compressToCbz => ({
+  type: SETTINGS_ACTIONS.SET_COMPRESS_TO_CBZ,
+  compressToCbz
 });
 
 export const setNotifyOnFinish = isEnabled => ({
@@ -63,9 +63,10 @@ export const doSetDarkTheme = () => {
   };
 };
 
-export const doSetDefaultFormat = format => {
+export const doSetCompressToCbz = compressToCbz => {
   return (dispatch, getState) => {
-    dispatch(setDefaultFormat(format));
+    const status = getState().settings.compressToCbz;
+    dispatch(setCompressToCbz(!status));
   };
 };
 

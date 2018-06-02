@@ -27,7 +27,7 @@ export const SETTINGSDBNAME = path.join(
 export default {
   isUpdateOnStartEnabled: false,
   saveLocation: os.homedir(),
-  saveFormat: "folder",
+  compressToCbz: false,
   isNotifyOnFinishEnabled: true,
   isDarkThemeEnabled: true
 };
