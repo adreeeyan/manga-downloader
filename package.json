@@ -1,5 +1,6 @@
 {
   "name": "baruch-manga-downloader",
+  "productName": "Baruch: Manga Downloader",
   "version": "0.0.5",
   "description": "A cross platform manga downloader.",
   "main": "./app/build/app.js",
@@ -20,12 +21,16 @@
     "copyright": "Copyright © 2018 Adrian Dela Piedra",
     "asar": true,
     "files": [
-      "app/build/**/*"
+      "app/build/**/*",
+      "icon.ico"
     ],
     "win": {
       "target": "NSIS"
     },
     "linux": {
+      "asarUnpack": [
+        "icon.ico"
+      ],
       "category": "Utility",
       "target": [
         "deb",

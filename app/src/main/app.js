@@ -14,10 +14,13 @@ let mainWindow;
 /** This function will create the mainWindow */
 function createWindow() {
   // Create the browser window.
+  const icon = path
+    .join(app.getAppPath(), "icon.ico")
+    .replace("app.asar", "app.asar.unpacked");
   if (process.env.NODE_ENV === "development") {
-    mainWindow = new BrowserWindow({ width: 1500, height: 700 });
+    mainWindow = new BrowserWindow({ width: 1500, height: 700, icon: icon });
   } else {
-    mainWindow = new BrowserWindow({ width: 1300, height: 700 });
+    mainWindow = new BrowserWindow({ width: 1300, height: 700, icon: icon });
   }
 
   // and load the index.html of the app.
