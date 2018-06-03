@@ -14,6 +14,7 @@
     "lint": "eslint --ext .jsx,.js app/src/main --fix",
     "build": "npm run dist && build -p always",
     "pack": "electron-builder --dir",
+    "local-dist": "npm run dist && electron-builder",
     "dist": "rimraf ./app/build && rimraf ./release && npm run prod",
     "postinstall": "electron-builder install-app-deps"
   },

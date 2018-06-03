@@ -1,6 +1,4 @@
 const electron = require("electron");
-const { autoUpdater } = require("electron-updater");
-const log = require("electron-log");
 
 // Module to control application life.
 const { app } = electron;
@@ -31,39 +29,6 @@ function createSplashScreen() {
     })
   );
 }
-
-function sendStatusToConsole(text) {
-  log.info(text);
-  console.log("status", text);
-}
-
-autoUpdater.on("checking-for-update", () => {
-  sendStatusToConsole("Checking for update...");
-});
-autoUpdater.on("update-available", info => {
-  sendStatusToConsole("Update available.");
-});
-autoUpdater.on("update-not-available", info => {
-  sendStatusToConsole("Update not available.");
-});
-autoUpdater.on("error", err => {
-  sendStatusToConsole("Error in auto-updater. " + err);
-});
-autoUpdater.on("download-progress", progressObj => {
-  let log_message = "Download speed: " + progressObj.bytesPerSecond;
-  log_message = log_message + " - Downloaded " + progressObj.percent + "%";
-  log_message =
-    log_message +
-    " (" +
-    progressObj.transferred +
-    "/" +
-    progressObj.total +
-    ")";
-  sendStatusToConsole(log_message);
-});
-autoUpdater.on("update-downloaded", info => {
-  sendStatusToConsole("Update downloaded");
-});
 
 /** This function will create the mainWindow */
 function createWindow() {
@@ -99,7 +64,6 @@ function createWindow() {
   mainWindow.webContents.on("did-finish-load", () => {
     splashScreen.destroy();
     mainWindow.show();
-    autoUpdater.checkForUpdatesAndNotify();
   });
 
   if (process.env.NODE_ENV === "development") {

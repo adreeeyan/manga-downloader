@@ -9,6 +9,7 @@ import {
   SETTINGSDBNAME
 } from "./consts/settings";
 import InitService from "./services/init-services";
+import UpdateService from "./services/update-services";
 
 /*
 Here we are getting the initial state injected by the server. See routes/index.js for more details
@@ -25,6 +26,7 @@ export const store = createStore(
 // services should be initialized before the store can call subscriptions
 InitService.restoreSettings();
 InitService.updateAllMangasList();
+UpdateService.checkForUpdate();
 
 // subscribe store changes
 let previousState = {};

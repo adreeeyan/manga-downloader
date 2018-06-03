@@ -13,12 +13,13 @@ import AboutPage from "./pages/about-page";
 
 import GlobalModalHolder from "./components/global-modal-holder";
 import LoadingIndicator from "./components/loading-indicator";
+import AppUpdateConfirmation from "./components/appupdate-confirmation";
 import "../res/scss/app.scss";
 
 import "jquery/dist/jquery.min.js";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-const App = ({ globalMessage = "", theme }) => (
+const App = ({ globalMessage = "", theme, appupdate }) => (
   <ThemeSwitcher themePath="./themes" defaultTheme={theme}>
     <HashRouter>
       <div className="app">
@@ -40,6 +41,11 @@ const App = ({ globalMessage = "", theme }) => (
             )}
           />
         </div>
+        {appupdate.haveVersion && (
+          <GlobalModalHolder>
+            <AppUpdateConfirmation />
+          </GlobalModalHolder>
+        )}
         {globalMessage && (
           <GlobalModalHolder isUncloseable={true}>
             <LoadingIndicator description={globalMessage} />
@@ -52,6 +58,7 @@ const App = ({ globalMessage = "", theme }) => (
 
 const mapStateToProps = state => ({
   globalMessage: state.globalMessage,
+  appupdate: state.appupdate,
   theme: state.settings.isDarkThemeEnabled ? "superhero" : "pulse"
 });
 

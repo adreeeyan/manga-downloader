@@ -7,6 +7,7 @@ import selectedChapters from "./chapters";
 import { globalMessage } from "./global-message";
 import { settings } from "./settings";
 import { feedback } from "./feedback";
+import { appupdate } from "./appupdate";
 
 const rootReducer = combineReducers({
   allMangas,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   isFetchingManga,
   globalMessage,
   settings,
-  feedback
+  feedback,
+  appupdate
 });
 
 export default rootReducer;
