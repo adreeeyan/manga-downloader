@@ -1,0 +1,34 @@
+language: node_js
+sudo: required
+dist: trusty
+node_js:  
+  - "9"
+
+matrix:
+  include:
+  - os: linux
+  - os: osx
+
+cache:
+  directories:
+    - node_modules
+
+install:
+  - npm install
+  - cd app/src/main/server
+  - npm install
+  - cd ../../../..
+  
+script:
+  - npm run dist
+  
+deploy:
+  provider: releases
+  api_key: $GH_TOKEN
+  file_glob: true
+  file:
+    - release/*.deb
+    - release/*.AppImage
+  skip_cleanup: true
+  on:
+    tags: true
