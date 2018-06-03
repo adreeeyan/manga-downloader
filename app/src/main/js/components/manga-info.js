@@ -165,10 +165,7 @@ class MangaInfo extends Component {
                     history.push("/");
                   }}
                   disabled={selectedChapters.length == 0}>
-                  <span className="fa fa-plus-circle mr-1" />Download
-                </button>
-                <button type="button" className="btn btn-outline-warning">
-                  <span className="fa fa-bookmark mr-1" />Bookmark
+                  <span className="fa fa-arrow-circle-down mr-1" />Download
                 </button>
               </div>
             </div>
