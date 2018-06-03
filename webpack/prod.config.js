@@ -76,6 +76,14 @@ module.exports = {
         to: path.join(__dirname, "../app/build")
       },
       {
+        from: "./src/main/splash.html",
+        to: path.join(__dirname, "../app/build")
+      },
+      {
+        from: "./src/main/logo.png",
+        to: path.join(__dirname, "../app/build")
+      },
+      {
         from: "./src/main/server",
         to: path.join(__dirname, "../app/build/server")
       },

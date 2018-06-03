@@ -10,6 +10,19 @@ const url = require("url");
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let splashScreen;
+
+function createSplashScreen() {
+  splashScreen = new BrowserWindow({ width: 600, height: 350, frame: false, transparent: true });
+
+  splashScreen.loadURL(
+    url.format({
+      pathname: path.join(__dirname, "splash.html"),
+      protocol: "file:",
+      slashes: true
+    })
+  );
+}
 
 /** This function will create the mainWindow */
 function createWindow() {
@@ -18,9 +31,9 @@ function createWindow() {
     .join(app.getAppPath(), "build", "icon_256.png")
     .replace("app.asar", "app.asar.unpacked");
   if (process.env.NODE_ENV === "development") {
-    mainWindow = new BrowserWindow({ width: 1500, height: 700, icon: icon });
+    mainWindow = new BrowserWindow({ width: 1500, height: 700, icon: icon, show: false });
   } else {
-    mainWindow = new BrowserWindow({ width: 1300, height: 700, icon: icon });
+    mainWindow = new BrowserWindow({ width: 1300, height: 700, icon: icon, show: false });
   }
 
   // and load the index.html of the app.
@@ -31,6 +44,11 @@ function createWindow() {
       slashes: true
     })
   );
+
+  mainWindow.webContents.on("did-finish-load", () => {
+      splashScreen.destroy();
+      mainWindow.show();
+  });
 
   if (process.env.NODE_ENV === "development") {
     // Open the DevTools.
@@ -71,6 +89,7 @@ const startApp = () => {
     if (serverOutput.indexOf("Manga provider API started") != -1) {
       console.log("creating the window");
       // create the window
+      createSplashScreen();
       createWindow();
     }
     // output from server
