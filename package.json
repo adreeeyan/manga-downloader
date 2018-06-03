@@ -1,7 +1,7 @@
 {
   "name": "baruch-manga-downloader",
   "productName": "Baruch: Manga Downloader",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "A cross platform manga downloader.",
   "homepage": "https://github.com/adrianonrails/manga-downloader",
   "author": "Adrian Dela Piedra <adrian.onrails@gmail.com>",
@@ -12,9 +12,9 @@
     "prod": "cross-env NODE_ENV=production webpack --progress --color --config webpack/prod.config.js",
     "start": "npm run prod && electron app/build/app.js",
     "lint": "eslint --ext .jsx,.js app/src/main --fix",
-    "test-run": "electron-builder",
+    "build": "npm run dist && build -p always",
     "pack": "electron-builder --dir",
-    "dist": "rimraf ./app/build && rimraf ./release && npm run prod && electron-builder --publish onTagOrDraft",
+    "dist": "rimraf ./app/build && rimraf ./release && npm run prod",
     "postinstall": "electron-builder install-app-deps"
   },
   "repository": {
@@ -108,6 +108,7 @@
     "bootstrap": "^4.1.1",
     "bootswatch": "^4.1.1",
     "classnames": "^2.2.5",
+    "electron-log": "^2.2.14",
     "electron-updater": "^2.21.10",
     "font-awesome": "^4.7.0",
     "history": "^4.7.2",

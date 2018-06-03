@@ -20,4 +20,4 @@ install:
   - cd ../../../..
   
 script:
-  - npm run dist
+  - npm run build
