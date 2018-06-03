@@ -1,7 +1,7 @@
 {
   "name": "baruch-manga-downloader",
   "productName": "Baruch: Manga Downloader",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A cross platform manga downloader.",
   "homepage": "https://github.com/adrianonrails/manga-downloader",
   "author": "Adrian Dela Piedra <adrian.onrails@gmail.com>",
