@@ -1,24 +1,26 @@
 {
   "name": "baruch-manga-downloader",
-  "version": "0.0.2",
-  "description": "An electron based manga downloader.",
+  "version": "0.0.5",
+  "description": "A cross platform manga downloader.",
   "main": "./app/build/app.js",
   "scripts": {
     "dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --config webpack/dev.config.js\" \"cross-env NODE_ENV=development electron ./app/src/main/app.js\"",
     "prod": "cross-env NODE_ENV=production webpack --progress --color --config webpack/prod.config.js",
     "start": "npm run prod && electron app/build/app.js",
     "lint": "eslint --ext .jsx,.js app/src/main --fix",
+    "test-run": "electron-builder",
     "pack": "electron-builder --dir",
-    "dist": "rm -rf ./app/build && rm -rf ./release && npm run prod && electron-builder",
+    "dist": "rimraf ./app/build && rimraf ./release && npm run prod && electron-builder",
     "postinstall": "electron-builder install-app-deps"
   },
   "author": "Adrian Dela Piedra <adrian.onrails@gmail.com>",
   "license": "MIT",
   "build": {
-    "productName": "Baruch: Manga downloader",
+    "productName": "Baruch: Manga Downloader",
+    "copyright": "Copyright © 2018 Adrian Dela Piedra",
     "asar": true,
     "files": [
-      "app/build"
+      "app/build/**/*"
     ],
     "win": {
       "target": "NSIS"
@@ -32,6 +34,16 @@
     },
     "mac": {
       "category": "public.app-category.utilities"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "runAfterFinish": true,
+      "installerIcon": "./build/icon.ico",
+      "license": "LICENSE",
+      "deleteAppDataOnUninstall": true
     },
     "directories": {
       "output": "release"
@@ -57,7 +69,7 @@
     "copy-webpack-plugin": "^4.5.1",
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
-    "electron": "^1.8.6",
+    "electron": "^2.0.0",
     "electron-builder": "20.14.7",
     "electron-devtools-installer": "^2.2.3",
     "eslint": "^4.19.1",
@@ -91,6 +103,7 @@
     "jquery": "^3.3.1",
     "lodash": "^4.17.10",
     "mkdirp": "^0.5.1",
+    "popper.js": "^1.14.3",
     "react": "^16.4.0",
     "react-bootstrap": "^0.32.1",
     "react-bootstrap-theme-switcher": "^1.0.7",
