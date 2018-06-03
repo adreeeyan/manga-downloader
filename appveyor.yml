@@ -1,5 +1,9 @@
+os: unstable
+
 environment:
   nodejs_version: "9"
+  GH_TOKEN:
+    secure: Su4T5ejbBPIL8hZFGjbkjd3ZyIPaZ83HYBRHoL7tFDf+DaLQ6bp6Y+9/lx7QllTe
 
 cache:
   - node_modules -> **\package.json
@@ -9,10 +13,16 @@ cache:
 # Install scripts. (runs after repo cloning)
 install:
   - ps: Install-Product node $env:nodejs_version x64
+  - set CI=true
+  - npm install -g npm@latest
+  - set PATH=%APPDATA%\npm;%PATH%
   - npm install
   - cd app/src/main/server
   - npm install
   - cd ../../../..
+
+matrix:
+  fast_finish: true
 
 # Post-install test scripts.
 test_script: 
