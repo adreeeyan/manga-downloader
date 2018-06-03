@@ -15,7 +15,7 @@ let mainWindow;
 function createWindow() {
   // Create the browser window.
   const icon = path
-    .join(app.getAppPath(), "icon.ico")
+    .join(app.getAppPath(), "build", "icon_256.png")
     .replace("app.asar", "app.asar.unpacked");
   if (process.env.NODE_ENV === "development") {
     mainWindow = new BrowserWindow({ width: 1500, height: 700, icon: icon });

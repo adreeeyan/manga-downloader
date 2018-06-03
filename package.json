@@ -22,14 +22,14 @@
     "asar": true,
     "files": [
       "app/build/**/*",
-      "icon.ico"
+      "build/icon_256.png"
     ],
     "win": {
       "target": "NSIS"
     },
     "linux": {
       "asarUnpack": [
-        "icon.ico"
+        "build/icon_256.png"
       ],
       "category": "Utility",
       "target": [
