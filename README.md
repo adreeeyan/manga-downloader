@@ -2,8 +2,7 @@
 Baruch: Manga Downloader  
 [![Build Status](https://travis-ci.org/adrianonrails/manga-downloader.svg?branch=master)](https://travis-ci.org/adrianonrails/manga-downloader)
 [![Build status](https://ci.appveyor.com/api/projects/status/kjcwn6xg1ljn8ml8?svg=true)](https://ci.appveyor.com/project/adrianonrails/manga-downloader)
-
-======
+======  
 **Baruch: Manga Downloader**  is as its name says, a manga downloader. It's a desktop application that runs on major platforms (e.g. Windows, Linux, OSX).
 
 ## Download
