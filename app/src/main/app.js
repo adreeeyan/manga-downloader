@@ -1,4 +1,6 @@
 const electron = require("electron");
+const { autoUpdater } = require("electron-updater");
+
 // Module to control application life.
 const { app } = electron;
 // Module to create native browser window.
@@ -13,7 +15,12 @@ let mainWindow;
 let splashScreen;
 
 function createSplashScreen() {
-  splashScreen = new BrowserWindow({ width: 600, height: 350, frame: false, transparent: true });
+  splashScreen = new BrowserWindow({
+    width: 600,
+    height: 350,
+    frame: false,
+    transparent: true
+  });
 
   splashScreen.loadURL(
     url.format({
@@ -24,6 +31,34 @@ function createSplashScreen() {
   );
 }
 
+autoUpdater.on("checking-for-update", () => {
+  console.log("Checking for update...");
+});
+autoUpdater.on("update-available", info => {
+  console.log("Update available.");
+});
+autoUpdater.on("update-not-available", info => {
+  console.log("Update not available.");
+});
+autoUpdater.on("error", err => {
+  console.log("Error in auto-updater. " + err);
+});
+autoUpdater.on("download-progress", progressObj => {
+  let log_message = "Download speed: " + progressObj.bytesPerSecond;
+  log_message = log_message + " - Downloaded " + progressObj.percent + "%";
+  log_message =
+    log_message +
+    " (" +
+    progressObj.transferred +
+    "/" +
+    progressObj.total +
+    ")";
+  console.log(log_message);
+});
+autoUpdater.on("update-downloaded", info => {
+  console.log("Update downloaded");
+});
+
 /** This function will create the mainWindow */
 function createWindow() {
   // Create the browser window.
@@ -31,9 +66,19 @@ function createWindow() {
     .join(app.getAppPath(), "build", "icon_256.png")
     .replace("app.asar", "app.asar.unpacked");
   if (process.env.NODE_ENV === "development") {
-    mainWindow = new BrowserWindow({ width: 1500, height: 700, icon: icon, show: false });
+    mainWindow = new BrowserWindow({
+      width: 1500,
+      height: 700,
+      icon: icon,
+      show: false
+    });
   } else {
-    mainWindow = new BrowserWindow({ width: 1300, height: 700, icon: icon, show: false });
+    mainWindow = new BrowserWindow({
+      width: 1300,
+      height: 700,
+      icon: icon,
+      show: false
+    });
   }
 
   // and load the index.html of the app.
@@ -46,8 +91,8 @@ function createWindow() {
   );
 
   mainWindow.webContents.on("did-finish-load", () => {
-      splashScreen.destroy();
-      mainWindow.show();
+    splashScreen.destroy();
+    mainWindow.show();
   });
 
   if (process.env.NODE_ENV === "development") {
@@ -106,7 +151,10 @@ const startApp = () => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on("ready", startApp);
+app.on("ready", () => {
+  startApp();
+  autoUpdater.checkForUpdatesAndNotify();
+});
 
 // Quit when all windows are closed.
 app.on("window-all-closed", () => {
