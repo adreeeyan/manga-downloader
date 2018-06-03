@@ -3,6 +3,7 @@
   "productName": "Baruch: Manga Downloader",
   "version": "0.0.5",
   "description": "A cross platform manga downloader.",
+  "homepage": "https://github.com/adrianonrails/manga-downloader",
   "main": "./app/build/app.js",
   "scripts": {
     "dev": "concurrently \"cross-env NODE_ENV=development webpack-dev-server --config webpack/dev.config.js\" \"cross-env NODE_ENV=development electron ./app/src/main/app.js\"",

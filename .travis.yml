@@ -29,6 +29,7 @@ deploy:
   file:
     - release/*.deb
     - release/*.AppImage
+    - release/*.dmg
   skip_cleanup: true
   on:
-    tags: true
+    tags: false
