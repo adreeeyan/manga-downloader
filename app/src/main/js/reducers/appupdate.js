@@ -4,7 +4,7 @@ export const appupdate = (state = {}, action) => {
   console.log("appupdate action", action, "state", state);
   switch (action.type) {
     case APPUPDATE_ACTIONS.SET_UPDATE:
-      return { ...state, data: action.appupdate };
+      return { ...state, data: action.update };
     case APPUPDATE_ACTIONS.SET_HAVE_UPDATE:
       return { ...state, haveUpdate: action.haveUpdate };
     case APPUPDATE_ACTIONS.ACCEPT_UPDATE:

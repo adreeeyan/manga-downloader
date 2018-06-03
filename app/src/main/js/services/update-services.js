@@ -1,6 +1,7 @@
 const remote = require("electron").remote;
 const { autoUpdater } = remote.require("electron-updater");
 const electron_log = remote.require("electron-log");
+const isDev = remote.require("electron-is-dev");
 
 import { store } from "../store";
 import { doSetUpdate } from "../actions/appupdate";
@@ -16,7 +17,6 @@ autoUpdater.on("checking-for-update", () => {
 autoUpdater.on("update-available", info => {
   sendStatusToConsole("Update available." + JSON.stringify(info, null, 4));
   store.dispatch(doSetUpdate(info));
-  store.dispatch(doSetHasUpdate());
 });
 autoUpdater.on("update-not-available", info => {
   sendStatusToConsole("Update not available." + JSON.stringify(info, null, 4));
@@ -41,6 +41,11 @@ autoUpdater.on("update-downloaded", info => {
 });
 
 const checkForUpdate = () => {
+  // if in dev mode, dont check update
+  if (isDev) {
+    console.log("not checking for update")
+    return;
+  }
   console.log("checking for update");
   autoUpdater.checkForUpdates();
 };

@@ -109,6 +109,7 @@
     "bootstrap": "^4.1.1",
     "bootswatch": "^4.1.1",
     "classnames": "^2.2.5",
+    "electron-is-dev": "^0.3.0",
     "electron-log": "^2.2.14",
     "electron-updater": "^2.21.10",
     "font-awesome": "^4.7.0",

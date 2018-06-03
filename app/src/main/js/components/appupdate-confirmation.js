@@ -40,7 +40,7 @@ const AppUpdateConfirmation = ({
 );
 
 const mapStateToProps = state => ({
-  appupdate: state.appupdate || {}
+  appupdate: state.appupdate.data || {}
 });
 
 const mapDispatchToProps = dispatch => ({

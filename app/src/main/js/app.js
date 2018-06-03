@@ -41,7 +41,7 @@ const App = ({ globalMessage = "", theme, appupdate }) => (
             )}
           />
         </div>
-        {appupdate.haveVersion && (
+        {appupdate.haveUpdate && (
           <GlobalModalHolder>
             <AppUpdateConfirmation />
           </GlobalModalHolder>
