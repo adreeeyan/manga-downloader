@@ -1,0 +1,25 @@
+environment:
+  nodejs_version: "9"
+
+cache:
+  - node_modules -> **\package.json
+  - '%APPDATA%\npm-cache'
+  - '%USERPROFILE%\.electron'
+
+# Install scripts. (runs after repo cloning)
+install:
+  - ps: Install-Product node $env:nodejs_version x64
+  - npm install
+  - cd app/src/main/server
+  - npm install
+  - cd ../../../..
+
+# Post-install test scripts.
+test_script: 
+  # Output useful info for debugging.
+  - node --version
+  - npm --version
+  # run dist
+  - npm run dist
+
+test: off
