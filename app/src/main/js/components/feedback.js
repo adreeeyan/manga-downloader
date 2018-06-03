@@ -18,6 +18,7 @@ const Feedback = ({ feedback, setFeedback, mailTo, closeFeedback }) => (
       Send
     </a>
     <small className="mt-2"><strong>NOTE:</strong> This will open your default email app, just hit send in there directly.</small>
+    <small className="mt-2">Contact me directly in this email if the above doesn't work... <strong>adrian.onrails@gmail.com</strong></small>
   </div>
 );
 

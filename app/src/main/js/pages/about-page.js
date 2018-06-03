@@ -26,19 +26,13 @@ const AboutPage = () => (
         <span>Background images used can be found here:</span>
         <ul>
           <li>
-            Fate stay night:{" "}
-            <b className="text-info">
-              http://www.freepngimg.com/png/26573-fate-stay-hd
-            </b>
-          </li>
-          <li>
-            Blue girl:{" "}
+            <span> Blue girl: </span>
             <b className="text-info">
               http://www.freepngimg.com/png/9223-anime-png-image
             </b>
           </li>
           <li>
-            Cat girl:{" "}
+            <span>Cat girl: </span>
             <b className="text-info">
               http://www.freepngimg.com/png/9219-anime-png-hd
             </b>
@@ -49,20 +43,32 @@ const AboutPage = () => (
       <div>
         <ul>
           <li>
-            Want something? Request a feature here:{" "}
+            <span>Want something? Request a feature here: </span>
             <b className="text-info">
               https://github.com/adrianonrails/manga-downloader/issues
             </b>
           </li>
           <li>
-            Found a bug? Report it here:{" "}
+            <span>Found a bug? Report it here: </span>
             <b className="text-info">
               https://github.com/adrianonrails/manga-downloader/issues
             </b>
           </li>
           <li>
-            Any other concerns? Email me at{" "}
+            <span>Any other concerns? Email me at </span>
             <b className="text-info">adrian.onrails@gmail.com</b>
+          </li>
+        </ul>
+      </div>
+      <h3>Plugs</h3>
+      <div className="plugs">
+        <ul>
+          <li>
+            <div>Are you a light novel fan? Checkout my mobile app for that. It provides an offline reading for your favorite light novels.</div>
+            <h6><strong>Baruch: Light novel reader <b className="text-info">https://github.com/adrianonrails/baruch</b></strong></h6>
+            <img src="https://user-images.githubusercontent.com/18593260/28713447-af6dfe5c-73c1-11e7-871a-d0f59c96537c.PNG" alt="list"/>
+            <img src="https://user-images.githubusercontent.com/18593260/28713455-afd09134-73c1-11e7-8e61-4840c07cebdf.PNG" alt="info" />
+            <img src="https://user-images.githubusercontent.com/18593260/28713453-afbd9174-73c1-11e7-8fb5-4733f516e2ca.PNG" alt="reader"/>
           </li>
         </ul>
       </div>
