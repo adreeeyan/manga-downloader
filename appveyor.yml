@@ -23,13 +23,14 @@ install:
 
 matrix:
   fast_finish: true
+build: off
+version: '{build}'
+shallow_clone: true
+clone_depth: 1
 
-# Post-install test scripts.
 test_script: 
   # Output useful info for debugging.
   - node --version
   - npm --version
   # run dist
   - npm run dist
-
-test: off
