@@ -1,17 +1,21 @@
+![search page](build/256x256.png "Search Page")  
 Baruch: Manga Downloader  
 [![Build Status](https://travis-ci.org/adrianonrails/manga-downloader.svg?branch=master)](https://travis-ci.org/adrianonrails/manga-downloader)
+[![Build status](https://ci.appveyor.com/api/projects/status/kjcwn6xg1ljn8ml8?svg=true)](https://ci.appveyor.com/project/adrianonrails/manga-downloader)
+
 ======
-**Baruch: Manga Downloader**  is as its name says, a manga downloader. It's a desktop application that runs on major platforms (e.g. Windows, Linux, MacOSX).
+**Baruch: Manga Downloader**  is as its name says, a manga downloader. It's a desktop application that runs on major platforms (e.g. Windows, Linux, OSX).
 
 ## Download
-* [Windows]()
+* [Windows](https://github.com/adrianonrails/manga-downloader/releases/download/v0.0.5/baruch-manga-downloader-setup-0.0.5.exe)
 * Linux
-    - [Deb]() 
-    - [AppImage]() 
-* [MacOSX]()
+    - [deb](https://github.com/adrianonrails/manga-downloader/releases/download/v0.0.5/baruch-manga-downloader_0.0.5_amd64.deb) 
+    - [AppImage](https://github.com/adrianonrails/manga-downloader/releases/download/v0.0.5/baruch-manga-downloader-0.0.5-x86_64.AppImage)
+        > Give an executable permission to the file so that you can run it  
+        `chmod +x baruchmangadownloaderfile.appimage` 
+* [OSX](https://github.com/adrianonrails/manga-downloader/releases/download/v0.0.5/baruch-manga-downloader-0.0.5.dmg)
 
 ## Features
-### Implemented Features
 - [x] Search manga
 - [x] Download manga
 - [x] Chapter selection
@@ -26,21 +30,15 @@ Baruch: Manga Downloader
 #### Want to request a feature? [Submit a request.](https://github.com/adrianonrails/manga-downloader/issues/new)
 #### Found some bugs? [Report it here.](https://github.com/adrianonrails/manga-downloader/issues/new)
 
-## Screenshot
+## Screenshots
 - Search Page  
     ![search page](screenshots/searchpage.png "Search Page")
 
 - Manga info  
     ![manga info](screenshots/mangainfo.png "Manga Info")
 
-- Additional download configurations  
-    ![download config](screenshots/downloadconfigs.png "Download config")
-
 - Downloads list  
     ![downloads list](screenshots/downloadslist.png "Downloads list")
-
-- Output (folder)  
-    ![output folder](screenshots/outputfolder.png "Output folder")
 
 - Light mode  
     ![light mode downloads list](screenshots/lightmodedownloadslist.png "Light mode downloads list")
@@ -60,8 +58,7 @@ Baruch: Manga Downloader
 * e-mail: adrian.onrails@gmail.com
 
 ## Support your dev
-[![Buy me a coffee](https://az743702.vo.msecnd.net/cdn/kofi2.png?v=0)](https://ko-fi.com/S6S6EEF0)  
-Or via paypal [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ECAGVBSCCMJHG)
+[![Buy me a coffee](https://az743702.vo.msecnd.net/cdn/kofi2.png?v=0)](https://ko-fi.com/S6S6EEF0)
 
 ## Disclaimer
 The manga that you downloaded using this app are not mine and are just crawled from other aggregators.
