@@ -41,16 +41,18 @@ const App = ({ globalMessage = "", theme, appupdate }) => (
             )}
           />
         </div>
-        {appupdate.haveUpdate && (
-          <GlobalModalHolder>
+        {(appupdate.haveUpdate || appupdate.updateReadyForInstall) && (
+          <GlobalModalHolder isUncloseable={true}>
             <AppUpdateConfirmation />
           </GlobalModalHolder>
         )}
-        {globalMessage && (
-          <GlobalModalHolder isUncloseable={true}>
-            <LoadingIndicator description={globalMessage} />
-          </GlobalModalHolder>
-        )}
+        {globalMessage &&
+          !appupdate.haveUpdate &&
+          !appupdate.updateReadyForInstall && (
+            <GlobalModalHolder isUncloseable={true}>
+              <LoadingIndicator description={globalMessage} />
+            </GlobalModalHolder>
+          )}
       </div>
     </HashRouter>
   </ThemeSwitcher>

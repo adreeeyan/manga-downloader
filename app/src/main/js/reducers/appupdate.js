@@ -11,6 +11,8 @@ export const appupdate = (state = {}, action) => {
       return { ...state, isAccepted: true };
     case APPUPDATE_ACTIONS.REJECT_UPDATE:
       return { ...state, isAccepted: false };
+    case APPUPDATE_ACTIONS.SET_UPDATE_READY_FOR_INSTALL:
+      return { ...state, updateReadyForInstall: action.updateReadyForInstall };
     default:
       return state;
   }

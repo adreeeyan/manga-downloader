@@ -13,19 +13,31 @@
 
   .versions {
     width: 80%;
+    text-align: left;
   }
 
   .notes {
     height: 50%;
     width: 80%;
+    text-align: left;
     background-color: rgba($secondary, 0.5);
     color: $white;
     padding: 10px;
     font-weight: bold;
   }
-  
+
   .actions {
     width: 80%;
     justify-content: center;
+  }
+
+  .update-available, .update-ready {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
   }
 }

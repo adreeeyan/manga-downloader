@@ -4,7 +4,30 @@ const electron_log = remote.require("electron-log");
 const isDev = remote.require("electron-is-dev");
 
 import { store } from "../store";
-import { doSetUpdate } from "../actions/appupdate";
+import { doSetUpdate, doSetUpdateReadyForInstall } from "../actions/appupdate";
+
+const checkForUpdate = () => {
+  // if in dev mode, dont check update
+  if (isDev) {
+    sendStatusToConsole("not checking for update")
+    return;
+  }
+  sendStatusToConsole("checking for update");
+  autoUpdater.checkForUpdates();
+};
+
+const downloadUpdate = () => {
+  sendStatusToConsole("downloading update");
+  autoUpdater.downloadUpdate();
+};
+
+const installUpdate = () => {
+  sendStatusToConsole("installing update");
+  autoUpdater.quitAndInstall();
+};
+
+// auto updater stuffs here
+autoUpdater.autoDownload = false
 
 const sendStatusToConsole = text => {
   electron_log.info("update status: " + text);
@@ -38,20 +61,15 @@ autoUpdater.on("download-progress", progressObj => {
 });
 autoUpdater.on("update-downloaded", info => {
   sendStatusToConsole("Update downloaded");
+  store.dispatch(doSetUpdateReadyForInstall(true));
 });
 
-const checkForUpdate = () => {
-  // if in dev mode, dont check update
-  if (isDev) {
-    console.log("not checking for update")
-    return;
-  }
-  console.log("checking for update");
-  autoUpdater.checkForUpdates();
-};
+// end auto updater stuffs
 
 const UpdateService = {
-  checkForUpdate
+  checkForUpdate,
+  downloadUpdate,
+  installUpdate
 };
 
 export default UpdateService;
