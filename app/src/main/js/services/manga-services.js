@@ -1,7 +1,9 @@
 import fs from "fs";
 import mkdirp from "mkdirp";
 import http from "http";
+import https from "https";
 import rimraf from "rimraf";
+import fetch from "fetch-retry";
 
 import {
   addDownloadedChapter,
@@ -17,6 +19,8 @@ const { shell } = require("electron").remote.require("electron");
 
 const SERVER_URL = "http://localhost:55235";
 
+const RETRY_OPTIONS = { retries: 5, retryDelay: 3000 };
+
 const searchManga = async title => {
   const mangas = await fetch(`${SERVER_URL}/manga?title=${title}`);
   return await mangas.json();
@@ -30,12 +34,12 @@ const getManga = async location => {
 
 const getChapters = async location => {
   const l = encryptParam(location);
-  const chapters = await fetch(`${SERVER_URL}/chapter/${l}`);
+  const chapters = await fetch(`${SERVER_URL}/chapter/${l}`, RETRY_OPTIONS);
   return await chapters.json();
 };
 
 const getPages = async location => {
-  const pages = await fetch(`${SERVER_URL}/page/${location}`);
+  const pages = await fetch(`${SERVER_URL}/page/${location}`, RETRY_OPTIONS);
   return await pages.json();
 };
 
@@ -73,13 +77,28 @@ const download = async (
     mkdirp.sync(chapterFolder);
 
     // get the pages for the chapter
-    const pages = await getPages(encryptParam(chapter.location));
+    let pages = [];
+    try {
+      pages = await getPages(encryptParam(chapter.location));
+    } catch (err) {
+      updateError(id);
+      throw new Error(
+        "There was an issue retrieving the manga pages. Kindly retry the download. If the problem persist, report to the dev."
+      );
+    }
     // download each pages
     for (const page of pages) {
       await checkIfPaused(id);
       const pagePrefix = page.index.toString().padStart(4, "0");
       const pageLocation = `${chapterFolder}/${pagePrefix}.jpg`;
-      await downloadImage(page.image, pageLocation);
+      try{
+        await downloadImage(page.image, pageLocation);
+      } catch (err) {
+        updateError(id);
+        throw new Error(
+          `There was an issue retrieving the specific manga page ${page.image}. Kindly retry the download. If the problem persist, report to the dev.`
+        );
+      }
     }
 
     // compress folder
@@ -97,18 +116,34 @@ const download = async (
 
 const downloadImage = async (url, location) => {
   return await new Promise((resolve, reject) => {
-    http.get(url, res => {
-      if (res.statusCode === 200) {
-        const fileStream = fs.createWriteStream(location);
-        res.pipe(fileStream);
-        res.on("error", err => {
-          reject(err);
-        });
-        fileStream.on("finish", function() {
-          resolve();
-        });
-      }
-    });
+    try {
+      // check url, if https use https module, if http use http module
+      const retrieverProtocol = url.split(":")[0] == "https" ? https : http;
+
+      retrieverProtocol.get(url, res => {
+        if (res.statusCode === 200) {
+          const fileStream = fs.createWriteStream(location);
+          res.pipe(fileStream);
+          res.on("error", err => {
+            console.log("error downloadImage: ", err);
+            reject(err);
+          });
+          res.on("timeout", err => {
+            console.log("timeout downloadImage: ", err);
+            reject(err);
+          });
+          fileStream.on("finish", function() {
+            resolve();
+          });
+        } else {
+          console.log("error downloadImage outside statusCode 200", res);
+          reject();
+        }
+      });
+    } catch (err) {
+      console.log("error on downloadImage httpGet", err);
+      reject(err);
+    }
   });
 };
 
@@ -121,8 +156,11 @@ const checkIfPaused = id => {
       if (!manga) {
         return;
       }
-      if (manga.status == DownloadStatus.PAUSED) {
-        console.log(`${manga.info.title} is paused`);
+      if (
+        manga.status == DownloadStatus.PAUSED ||
+        manga.status == DownloadStatus.ERROR
+      ) {
+        console.log(`${manga.info.title} is paused or error occured`);
         setTimeout(() => {
           checker();
         }, 1000);
@@ -141,6 +179,10 @@ const updateProgress = (id, chapter) => {
 
 const updateFinished = id => {
   store.dispatch(setDownloadMangaStatus(id, DownloadStatus.DOWNLOADED));
+};
+
+const updateError = id => {
+  store.dispatch(setDownloadMangaStatus(id, DownloadStatus.ERROR));
 };
 
 const notifyUserFinished = async (id, location) => {

@@ -6,7 +6,7 @@ import { DownloadStatus } from "../consts/download-status";
 
 const { shell } = require("electron").remote.require("electron");
 
-const DownloadItem = ({ manga, setFilter, setForDelete }) => (
+const DownloadItem = ({ manga, setFilter, setForDelete, retryDownload }) => (
   <div className="download-item">
     <div className="row">
       <div className="cover">
@@ -34,7 +34,7 @@ const DownloadItem = ({ manga, setFilter, setForDelete }) => (
             style={{
               width:
                 parseInt(
-                  manga.downloaded.length / manga.chapters.length * 100
+                  (manga.downloaded.length / manga.chapters.length) * 100
                 ) + "%"
             }}
           />
@@ -65,6 +65,16 @@ const DownloadItem = ({ manga, setFilter, setForDelete }) => (
               <span className="fa fa-play-circle mr-1" />Resume
             </button>
           )}
+          {manga.status == DownloadStatus.ERROR && (
+            <button
+              type="button"
+              className="btn btn-sm btn-info"
+              onClick={() => {
+                retryDownload(manga);
+              }}>
+              <span className="fa fa-play-circle mr-1" />Retry
+            </button>
+          )}
           <button
             type="button"
             className="btn btn-sm btn-success ml-1"
@@ -82,6 +92,18 @@ const DownloadItem = ({ manga, setFilter, setForDelete }) => (
             <span className="fa fa-trash mr-1" />Delete
           </button>
         </div>
+        {manga.status == DownloadStatus.ERROR && (
+          <div className="alert alert-dismissible alert-danger mt-2">
+            <button type="button" className="close" data-dismiss="alert">
+              &times;
+            </button>
+            <strong>Oh snap!</strong>
+            <span>
+              There was an error while downloading the manga. Try retrying it,
+              if error still persist, contact the dev.
+            </span>
+          </div>
+        )}
       </div>
     </div>
   </div>
