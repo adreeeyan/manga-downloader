@@ -66,9 +66,9 @@ function createWindow() {
     mainWindow.show();
   });
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
   if (process.env.NODE_ENV === "development") {
+    // Open the DevTools
+    mainWindow.webContents.openDevTools();
     const {
       default: installExtension,
       REACT_DEVELOPER_TOOLS,

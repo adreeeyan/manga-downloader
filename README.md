@@ -6,13 +6,14 @@ Baruch: Manga Downloader
 **Baruch: Manga Downloader**  is as its name says, a manga downloader. It's a desktop application that runs on major platforms (e.g. Windows, Linux, OSX).
 
 ## Download
-* [Windows](https://github.com/adrianonrails/manga-downloader/releases/download/v0.0.5/baruch-manga-downloader-setup-0.0.5.exe)
+* [Windows](https://github.com/adrianonrails/manga-downloader/releases/download/v1.0.1/baruch-manga-downloader-setup-1.0.1.exe)
 * Linux
-    - [deb](https://github.com/adrianonrails/manga-downloader/releases/download/v0.0.5/baruch-manga-downloader_0.0.5_amd64.deb) 
-    - [AppImage](https://github.com/adrianonrails/manga-downloader/releases/download/v0.0.5/baruch-manga-downloader-0.0.5-x86_64.AppImage)
-        > Give an executable permission to the file so that you can run it  
-        `chmod +x baruchmangadownloaderfile.appimage` 
-* [OSX](https://github.com/adrianonrails/manga-downloader/releases/download/v0.0.5/baruch-manga-downloader-0.0.5.dmg)
+    - [deb](https://github.com/adrianonrails/manga-downloader/releases/download/v1.0.1/baruch-manga-downloader_1.0.1_amd64.deb) 
+    - [AppImage](https://github.com/adrianonrails/manga-downloader/releases/download/v1.0.1/baruch-manga-downloader-1.0.1-x86_64.AppImage)  
+        > AppImage is preferred for Linux. (Auto update doesn't work on .deb)  
+        Note: Give an executable permission to the file so that you can run it.  
+        > `chmod +x baruch-manga-downloader-1.0.1-x86_64.AppImage` 
+* [OSX](https://github.com/adrianonrails/manga-downloader/releases/download/v1.0.1/baruch-manga-downloader-1.0.1.dmg)
 
 ## Features
 - [x] Search manga
